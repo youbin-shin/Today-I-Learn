@@ -612,15 +612,65 @@ for tc in range(T):
 ```
 
 ```python
+# 1284. 수도 요금 경쟁
 
+T = int(input())
+
+for tc in range(T):
+    P, Q, R, S, W = map(int, input().split())
+    A_price = W * P
+    if W <= R:
+
+        B_price = Q
+    else:
+        B_price = Q + (W - R) * S
+
+    final_price = min(A_price, B_price)
+
+    print('#{} {}'.format(tc+1, final_price))
 ```
 
 ```python
+# 1940. 가랏! RC카!
 
+T = int(input())
+for tc in range(T):
+    test = int(input())
+    car = 0
+    distance = 0
+    for i in range(test):
+        selection = list(map(int, input().split()))
+        if selection[0] == 1:
+            car += selection[1]
+            distance += car
+        elif selection[0] == 2:
+            car -= selection[1]
+            if car < 0:
+                car = 0
+            else:
+                distance += car
+        else:
+            distance += car
+
+    print('#{} {}'.format(tc+1, distance))
 ```
 
 ```python
+# 1288. 새로운 불면증 치료법
 
+T = int(input())
+for tc in range(T):
+    N = input()
+    numlst = [0]*10
+
+    k = 0
+    while numlst.count(0) != 0:
+        k += 1
+        Nk = str(int(N) * k)
+        for i in Nk:
+            numlst[int(i)] += 1
+
+    print('#{} {}'.format(tc+1, Nk))
 ```
 
 ```python
