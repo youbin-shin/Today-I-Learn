@@ -1358,7 +1358,7 @@ while (i < 10) {
 
 이벤트 리스너의 콜백함수에서 this를 활용하는 경우, 이벤트 리스너에 바인딩 되어 있는 요소가 지정된다. 아래와 같이 이벤트를 등록하는 경우 버블링에 의해 this 값은 계속 변경된다.
 
-```html
+```javascript
 <stript>
     const clickEvent = function(event) { // event 인자는 첫번째로 들어오는 값(이 코드에서는 event가 언제/어디서 발생했는지 볼 수 있음)
     console.log('target')
