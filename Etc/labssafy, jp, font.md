@@ -1,16 +1,16 @@
-lab.ssafy
+2020.01.21
+
+### lab.ssafy
 
 id youbin5575@gmail.com
 
 비번 shine5575
 
-
-
-항상 프로젝트를 만들면 설정에 들어가서 select members to invite 에 edujunho를 검색하여 maintainer로 하여 추가하기
+- 항상 프로젝트를 만들면 설정에 들어가서 select members to invite 에 edujunho를 검색하여 maintainer로 하여 추가하기
 
 
 
-jupyter notebook 들가는 방법
+### jupyter notebook 들가는 방법
 
 열고자하는 문서 빈곳에서 git bash를 열고 `jupyter notebook`입력하여 들어가기
 
@@ -27,7 +27,7 @@ jupyter notebook 들가는 방법
 
 
 
-**폰트 종류**
+#### 폰트 종류
 
 - hack font : 다운로드 hackfontsWindowsinstaller.exe 클릭
 - souce code pro
@@ -36,7 +36,7 @@ jupyter notebook 들가는 방법
 
 
 
-**폰트 바꾸기**
+#### 폰트 바꾸기
 
 1. 다운로드 이후 크롬 설정으로 들어가서 글꼴을 검색 > 글꼴 맞춤설정 > 고정폭 글꼴 >  hack
 
