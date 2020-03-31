@@ -59,3 +59,286 @@ DTL에서 연산 X, python 코드 X
 {{ content|truncatechars:10 }}
 ```
 
+
+
+# 0331
+
+### Django project / app
+
+하나의 프로젝트가 복수의 app을 가지는 구조!
+
+#### 프로젝트 기본 설정
+
+1. `urls.py`
+
+![image-20200331094432647](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200331094432647.png)
+
+2. Templates 폴더 구조
+
+   1. 개별 app에 생성된 templates 폴더의 하위 디렉토리는 템플릿 파일로 활용된다.
+
+   2. Django는 템플릿 파일을 탐색하는 과정에서 DIRS와 INSTALLED_APPS 선언 순서에 따른다.
+
+      - APP_DIRS : True 
+
+        등록된 앱에 있는 templates 하위 파일을 모두 templates로 보겠다를 의미
+
+      - DIRS : [ os.~~]
+
+        앱이 아니라 다른 폴더에 있는 templates를 등록하고 싶을 때 사용
+
+   3. 다중 app으로 구성되어 있는 경우 이름 중복이 발생가능하기에 `templates/{app이름}/{}.html` 로 구조화한다.
+
+3. `settings.py` 에서 경로 지정
+
+   `os.path.join` 이용하여 지정
+
+   `BASE_DIR`은 장고안에 프로젝트 파일을 의미
+
+   ```python
+   # 56번째 코드 라인
+   TEMPLATES = [
+       {~~
+        'DIRS' : [
+            os.path.join(BASE_DIR, 'django_intro', 'templates') # 하위로 순서대로 작성
+        ],    
+   }
+       
+   # 80번째 코드 라인
+   DATABASES = {
+       'default': {
+           'ENGINE' : 'django.db.backends.sqlite3',
+           'NAME' : os.path.join(BASE_DIR, 'db.sqlite3')
+       }
+   }
+   ```
+
+4. import
+
+   같은 라인에서 import 하고 싶을 경우 `.` 이용하기
+
+   ex) urls.py에서 views.py 가져올 때 : `from . import views`
+
+   ex) 다른 폴더 pages에서 view.py 가져올 경우 : `from pages import views`
+
+---
+
+### 사용자 정보 처리 Form 로직
+
+url을 **두 개** 만들기!
+
+1. 사용자에게 입력받는 form
+2. 처리하는 url
+
+ex) 로그인 로직
+
+- url/login
+- **view def login**
+- template html <form action="/login/">
+- url/login/complete
+- **view def complete**
+
+![image-20200331100017850](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200331100017850.png)
+
+### ORM
+
+- 장점
+  - SQL을 몰라도 DB 연동이 가능하다.(SQL 문법을 몰라도 쿼리를 조작할 수 있다.)
+  - SQL의 절차적인 접근이 아닌 객체 지향적인 접근으로 인해 **생산성**이 대폭 증폭한다.
+  - ERD 를 보는 것에 대한 의존도를 낮출 수 있다.
+  - ORM은 해당 객체들을 재활용할 수 있다. 때문에 모델에서 가공된 데이터를 view와 template과 합쳐지는 형태로 MTV 디자인 패턴을 유지할 수 있다.
+- 단점
+  - ORM 만으로는 완전한/거대한 서비스를 구현하기는 어렵다.
+  - 사용이 쉬운 반면 설계는 신중하게 해야 한다.
+  - 오히려 프로젝트에 복잡성이 커질 경우 SQL 보다 난이도가 상승할 수 있다.
+
+---
+
+### Model
+
+> A model is the single, definitive source of information about your data
+
+데이터에 대한 단일 정보 소스
+
+|                                  | 의미                                      |
+| -------------------------------- | ----------------------------------------- |
+| Model                            | MTV 패턴에서 데이터를 관리                |
+| Migration                        | Model로 정의된 데이터베이스 스키마를 반영 |
+| ORM(Query methods, QuerySet API) | python 객체 조작으로 데이터베이스를 조작  |
+
+#### DB
+
+> 데이터 베이
+>
+> 여러 사람이 공유하여 사용할 목적으로 **체계화**하여 통합, 관리하는 데이터의 집합
+
+스키마를 통해 타입을 미리 정해 놓는다.
+
+#### 마이그레이션
+
+> 모델의 변경사항들을 데이터베이스 스키마에 실제로 반영하는 방법
+
+##### migration 흐름
+
+1. Model 생성/수정/삭제(각각 필드) 등
+2. migration 파일 생성
+   - migration 파일은 model의 변경사항을 기록하고, 데이터베이스 반영하기 위한 코드들로 구성된다.
+   - Migration 파일은 데이터베이스 스키마를 위한 버전관리시스템이라고 생각하자.
+3. migrate를 통한 데이터베이스에 적용
+
+#### Database 조작
+
+CRUD
+
+Create / Read / Update / Delete
+
+##### ORM
+
+Object Relational Mapping
+
+실질적으로 데이터베이스 조작을 파이썬으로 할 수 있다!
+
+---
+
+1. 목록페이지 만들기
+   1. u
+   2. v
+   3. t
+
+---
+
+### 모델 작성 또는 변경 시 필수 3단계
+
+1. models.py 작성
+2. makemigrations
+3. migrate
+
+### 장고 편히보기위해
+
+pip install ipython django-extensions
+
+--> python shell 편하게 사용하게 해줌
+
+settings > INSTLEED_APPS 에 `django_extensions` 추가 이걸 third-party app이라구함!!
+
+터미널에 `$ python manage.py shell_plus`
+
+-  `Article.objects.all()`  ★  :  전체 조회
+
+  <QuerySet [<Article: Article object (1)>]> 출력됨! 리스트라구 생각하면 된다.
+
+  아무것도 없으면 None 값이 아니라 빈리스트로 뜸.
+
+#### article Create 방법
+
+1. article = Article(title='second', content='django!') 
+
+2. article = Article()
+
+   article.title='first'
+
+   article.content='second'
+
+3. Article.objects.create(title='third', content='django!!!') 
+   - instance 생성하지 않았고 save() 까지 완료해준다!!
+
+id는 마지막값으로 들어가니까 신경쓰지 말기
+
+- pk & id
+
+  둘이 거의 같은 것이나 pk는 shortcut!
+
+  id === id__exact == pk
+
+  장고에서는 pk선호!
+
+  앞에 지웟어도 id 지워지지않는다 평생 같은 id!!
+
+#### Read
+
+- Article.objects.all()
+
+  전체 조회
+
+- Article.objects.get(pk=2))
+
+  개별 접근
+
+  pk이용하여 하나 조회
+
+#### Update
+
+```bash
+In [20]: article                                                      
+Out[20]: <Article: Article object (1)>
+
+In [21]: article.title                                                
+Out[21]: 'first'
+
+In [22]: article.title = 'byebye'                                     
+
+In [23]: article.title                                                
+Out[23]: 'byebye'
+
+In [24]: article.save() # save해야한다!!
+```
+
+
+
+#### Delete
+
+선택후 delete
+
+save 할 필요 X
+
+```bash
+In [27]: article.title                                                
+Out[27]: 'byebye'
+
+In [28]: article = Article.objects.get(pk=2)                          
+
+In [29]: article                                                      
+Out[29]: <Article: Article object (2)>
+
+In [30]: article.delete() 
+```
+
+### 데이터 들어갔는지 확인
+
+1. 관리자 계정 만들기
+
+   `$ python manage.py createsuperuser`
+   사용자 이름 (leave blank to use 'ubuntu'): admin
+   이메일 주소: 
+   Password: 
+   Password (again): 
+
+2. 이후 페이지에 `/admin` 추가하여 입력하여 사이트고고
+
+3. 관리자 계정에 했던 로그인을 위에 사이트를 하면 django 관리창 뜬다!
+
+4. ide에서 admin.py에서
+
+   ```python
+   from django.contrib import admin
+   from .models import Article
+   
+   # Register your models here.
+   admin.site.register(Article) #등록
+   ```
+
+   ### CRUD 다 구현되어있다ㅏㅏ
+
+   admin에서 model test
+
+##### 관리자 계정은 반드시 migrate 이후에 진행해야한다.
+
+관리 계정도 db에 저장할 곳이 있어야하기 때문에!!
+
+![image-20200331181009474](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200331181009474.png)
+
+### 참고 - 추가 명령어 (옵션)
+
+sqlmigrate
+
+showmigrations == status
