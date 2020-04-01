@@ -406,7 +406,38 @@ DB에 대한 model --> 서비스에 대한 영향
 
      - a.delete()
 
+## 0401
 
+### cSS와 같이 정적 가져올때
 
+![image-20200401095308873](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200401095308873.png)
 
+![image-20200401095422615](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200401095422615.png)
 
+![image-20200401102354945](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200401102354945.png)
+
+gitignore
+
+> https://www.gitignore.io/
+
+![image-20200401104904958](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200401104904958.png)
+
+gittignore 해야할걸 모르겟으면 구글에 gitignore 검색!!이거에 django 치면 다나옴
+
+### git
+
+project 에서 git init 하고
+
+touch .gitignore 명령어로 만들기
+
+> 언어는 퀄리티가 낮아서 github.gitignore 에서 추가하는 것이 좋다
+>
+> https://github.com/github/gitignore
+
+![image-20200401121932727](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200401121932727.png)
+
+https://docs.djangoproject.com/en/dev/internals/contributing/writing-code/coding-style/
+
+django coding style 
+
+import 순서
