@@ -117,6 +117,8 @@ def deQueue():
         return Q[front]
 ```
 
+![image-20200402162414095](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200402162414095.png)
+
 ##### 공백상태 및 포화상태 검사 : isEmpty(), isFull()
 
 ```python
