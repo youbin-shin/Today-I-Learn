@@ -1,13 +1,12 @@
-# 알고리즘 문제 정리
+# 알고리즘 learn course
 
-> 2020.03.09 ~
+>  Programming - intermediate
 
+### LIST1
 
+#### 4828. [파이썬 S/W 문제해결 기본] 1일차 - min max
 
 ```python
-# learn course
-# 4828. [파이썬 S/W 문제해결 기본] 1일차 - min max
-
 T = int(input())
 
 for t in range(T):
@@ -23,10 +22,9 @@ for t in range(T):
     print('#{} {}'.format(t+1, max-min))
 ```
 
-```python
-# learn course
-# 4835. [파이썬 S/W 문제해결 기본] 1일차 - 구간합
+#### 4835. [파이썬 S/W 문제해결 기본] 1일차 - 구간합
 
+```python
 # solution 1
 for t in range(int(input())):
     N, M = map(int, input().split())
@@ -44,7 +42,9 @@ for t in range(int(input())):
             Min = sum
 
     print('#{} {}'.format(t+1, Max-Min))
-    
+```
+
+```python
 # solution 2 _ 슬라이싱 이용
 test_case = int(input())
 
@@ -60,10 +60,9 @@ for i in range(test_case):
     print(f'#{i+1} {sum_list[-1]-sum_list[0]}')
 ```
 
-```python
-# learn course
-# 4834. [파이썬 S/W 문제해결 기본] 1일차 - 숫자 카드
+#### 4834. [파이썬 S/W 문제해결 기본] 1일차 - 숫자 카드
 
+```python
 for t in range(int(input())):
     N = int(input())
     card = list(map(int, input()))
@@ -79,91 +78,9 @@ for t in range(int(input())):
     print('#{} {} {}'.format(t+1, idx, max(cardcnt)))
 ```
 
-```python
-# 1959. 두 개의 숫자열
-
-for t in range(int(input())):
-    N, M = map(int, input().split())
-    A = list(map(int, input().split()))
-    B = list(map(int, input().split()))
-
-    if N > M:
-        N, M = M, N
-        A, B = B, A
-
-    ans = -100000
-    for i in range(M-N+1):
-        sum = 0
-        for j in range(N):
-            sum += A[j]*B[i+j]
-        if ans < sum:
-            ans = sum
-
-    print('#{} {}'.format(t+1, ans))
-```
+#### 4831. [파이썬 S/W 문제해결 기본] 1일차 - 전기버스
 
 ```python
-# 4047. 영준이의 카드 카운팅
-
-# my solution
-for t in range(int(input())):
-    card = input()
-    cardlist = [0]*(len(card)//3)
-    for i in range(len(card)//3):
-        cardlist[i] = card[3*i:3*i+3]
-    cardnums = [13, 13, 13, 13]
-    ans = ''
-    # print(cardlist)
-
-    if len(set(cardlist)) != len(cardlist):
-        ans = 'ERROR'
-
-    else:
-        for i in range(len(cardlist)):
-            if cardlist[i][0] == 'S':
-                cardnums[0] -= 1
-            elif cardlist[i][0] == 'D':
-                cardnums[1] -= 1
-            elif cardlist[i][0] == 'H':
-                cardnums[2] -= 1
-            else:
-                cardnums[3] -= 1
-
-        for i in range(4):
-            ans += str(cardnums[i]) + ' '
-
-    print('#{} {}'.format(t+1, ans))
-    
-    
-# teacher solution
-for tc in range(1, int(input()) + 1):
-    arr = input()
-    # 필요한 카드 개수
-    cnt = [13] * 4
-
-    # 개별 카드 정보를 식별, 3개씩 읽어오기
-    cards = set()
-    for i in range(0, len(arr), 3):  # 카드 시작 위치
-        temp = arr[i: i + 3]  # 카드 중복 체크를 위해
-        if temp in cards:
-            cnt = 'ERROR'
-            break  # ERROR
-        cards.add(temp)
-        if temp[0] == 'S':
-            cnt[0] -= 1
-        elif temp[0] == 'D':
-            cnt[1] -= 1
-        elif temp[0] == 'H':
-            cnt[2] -= 1
-        else:
-            cnt[3] -= 1
-    print(cnt)
-```
-
-```python
-# learn course
-# 4831. [파이썬 S/W 문제해결 기본] 1일차 - 전기버스
-
 for t in range(1, int(input()) + 1):
     K, N, M = map(int, input().split())
     battery = list(map(int, input().split()))
@@ -191,93 +108,11 @@ for t in range(1, int(input()) + 1):
     print('#{} {}'.format(t, cnt))
 ```
 
-```python
-# 2805. 농작물 수확하기
+### LIST2
 
-for t in range(1, int(input()) + 1):
-    N = int(input())
-    crops = [list(map(int, input())) for _ in range(N)]
-    ans = sum(crops[N//2])
-
-    plus = N
-    start = 0
-    for i in range(N//2-1, -1, -1):
-        plus -= 2
-        start += 1
-        for j in range(plus):
-            ans += crops[i][start+j]
-            ans += crops[N-i-1][start+j]
-
-    print('#{} {}'.format(t, ans))
-```
+#### 4836. [파이썬 S/W 문제해결 기본] 2일차 - 색칠하기
 
 ```python
-# 3347. 올림픽 종목 투표
-
-for t in range(1, int(input()) + 1):
-    N, M = map(int, input().split())
-    A = list(map(int, input().split()))
-    vote = [0] * N
-    B = list(map(int, input().split()))
-
-    for b in B:
-        for i in range(N):
-            if A[i] <= b:
-                vote[i] += 1
-                break
-    print(vote)
-
-    print('#{} {}'.format(t, vote.index(max(vote))+1))
-```
-
-```python
-# 4408. 자기 방으로 돌아가기
-# 통과는 했지만 왜 짝수를 기준으로 했을 때 예외가 발생하는지 모르겠다...
-
-for t in range(1, int(input()) + 1):
-    N = int(input())
-    rooms = [0] * 201
-    for _ in range(N):
-        start, end = map(int, input().split())
-        if start > end:
-            start, end = end, start
-        if start%2 == 0:
-            start -= 1
-        for i in range(start, end+1, 2):
-            rooms[int(i/2)] += 1
-
-    print('#{} {}'.format(t, max(rooms)))
-```
-
-```python
-# 6190. 정곤이의 단조 증가하는 수
-
-for t in range(1, int(input()) + 1):
-    N = int(input())
-    A = list(map(int, input().split()))
-    lst = []
-
-    for i in range(N):
-        for j in range(i+1, N):
-            num = str(A[i]*A[j])
-            for k in range(len(num)-1):
-                if int(num[k]) > int(num[k+1]):
-                    break
-            else:
-                lst.append(int(num))
-    lst.sort()
-
-    if len(lst) == 0:
-        result = -1
-    else:
-        result = lst[-1]
-    print('#{} {}'.format(t, result))
-```
-
-```python
-# learn course
-# 4836. [파이썬 S/W 문제해결 기본] 2일차 - 색칠하기
-
 for t in range(int(input())):
     board = [[0 for _ in range(10)] for _ in range(10)]
     for n in range(int(input())):
@@ -286,8 +121,6 @@ for t in range(int(input())):
         for x in range(x1, x2+1):
             for y in range(y1, y2+1):
                 board[x][y] += val
-
-
     ans = 0
     for i in range(10):
         for j in range(10):
@@ -296,80 +129,9 @@ for t in range(int(input())):
     print('#{} {}'.format(t+1, ans))
 ```
 
-```python
-# 1974. 스도쿠 검증
-
-for t in range(int(input())):
-    arr = [list(map(int, input().split())) for _ in range(9)]
-    ans = 1
-    for i in range(9):
-
-        row = [0] * 10
-        col = [0] * 10
-        for j in range(9):
-           if row[arr[i][j]] == 1 or col[arr[j][i]] == 1:
-               ans = 0
-               break
-           row[arr[i][j]] = 1
-           col[arr[j][i]] = 1
-
-    for x in range(0, 9, 3):
-        for y in range(0, 9, 3):
-            c = [0] * 10
-            for i in range(3):
-                for j in range(3):
-                    if c[arr[i+x][j+y]] == 1:
-                        ans = 0
-                        break
-                    c[arr[i+x][y+j]] = 1
-
-
-    print('#{} {}'.format(t+1,ans))
-```
+#### 4839. [파이썬 S/W 문제해결 기본] 2일차 - 이진탐색
 
 ```python
-# 3349. 최솟값으로 이동하기
-
-for t in range(int(input())):
-    W, H, N = map(int, input().split())
-    cnt = 0
-    x, y = map(int, input().split())
-    for i in range(N-1):
-        xn, yn = map(int, input().split())
-        dx = x - xn
-        dy = y - yn
-        if dy*dx > 0:
-            cnt += max(abs(dx), abs(dy))
-        else:
-            cnt += abs(dx) + abs(dy)
-        x, y = xn, yn
-
-    print('#{} {}'.format(t+1, cnt))
-```
-
-```python
-# 2001. 파리 퇴치
-
-for t in range(int(input())):
-    N, M = map(int, input().split())
-    fly = [list(map(int, input().split())) for _ in range(N)]
-
-    ans = 0
-    for i in range(N-M+1):
-        for j in range(N-M+1):
-            catch = 0
-            for k in range(M):
-                for k2 in range(M):
-                    catch += fly[i+k][j+k2]
-            ans = max(catch, ans)
-            
-    print('#{} {}'.format(t+1, ans))
-```
-
-```python
-# learn course
-# 4839. [파이썬 S/W 문제해결 기본] 2일차 - 이진탐색
-
 def binarySearch(all, page):
     cnt = 0
     l = 1
@@ -395,10 +157,9 @@ for t in range(int(input())):
     print('#{} {}'.format(t+1, ans))
 ```
 
-```python
-# learn course
-# 4843. [파이썬 S/W 문제해결 기본] 2일차 - 특별한 정렬 
+#### 4843. [파이썬 S/W 문제해결 기본] 2일차 - 특별한 정렬 
 
+```python
 for t in range(int(input())):
     N = int(input())
     nums = list(map(int, input().split()))
@@ -415,97 +176,417 @@ for t in range(int(input())):
     print('#{} {}'.format(t+1,result))
 ```
 
-```python
-# 5356. 의석이의 세로로 말해요
+#### 4837. [파이썬 S/W 문제해결 기본] 2일차 - 부분집합의 합
 
+```python
+tc = int(input())
+for t in range(tc):
+    N, K = map(int, input().split())
+    A = list(range(1,13))
+    cnt = 0
+
+    for i in range(1<<len(A)):
+        sum = 0
+        subset = []
+        for j in range(len(A)):
+            if i & (1<<j):
+                subset.append(A[j])
+        for k in range(len(subset)):
+            sum += subset[k]
+        if sum == K and len(subset) == N:
+            cnt += 1
+
+    print('#{} {}'.format(t+1, cnt))
+```
+
+### String
+
+#### 4864. [파이썬 S/W 문제해결 기본] 3일차 - 문자열 비교
+
+```python
+testcase = int(input())
+
+for tc in range(testcase):
+    str1 = input()
+    str2 = input()
+    l1 = len(str1)
+    l2 = len(str2)
+    i = j = 0
+    while i < l2 and j < l1:
+        if str2[i] != str1[j]:
+            i = i-j
+            j = -1
+        i = i + 1
+        j = j + 1
+
+    if j == l1:
+        result = 1
+    else:
+        result = 0
+
+    print('#{} {}'.format(tc+1, result))
+```
+
+#### 4861. [파이썬 S/W 문제해결 기본] 3일차 - 회문
+
+```python
+testcase = int(input())
+
+for tc in range(testcase):
+    N, M = map(int, input().split())
+    lst = [[''] for _ in range(N)]
+    for i in range(N):
+        lst[i] = list(input())
+
+    # 가로 확인하기
+    for j in range(N):
+        for i in range(N - M + 1):
+            temp = lst[j][i:i+M]
+            if temp == temp[::-1]:
+                result = ''.join(temp)
+                break
+
+    # 세로 확인하기
+    for i in range(N):
+        for j in range(N - M + 1):
+            temp = []
+            for k in range(M):
+                temp.append(lst[j+k][i])
+            if temp == temp[::-1]:
+                result = ''.join(temp)
+                break
+
+
+    print('#{} {}'.format(tc+1, result))
+```
+
+#### 4865. [파이썬 S/W 문제해결 기본] 3일차 - 글자수
+
+```python
+testcase = int(input())
+
+for tc in range(testcase):
+    str1 = list(set(input()))
+    str2 = input()
+
+    cnt = 0
+    for i in str1:
+        temp_cnt = str2.count(i)
+        if temp_cnt > cnt:
+            cnt = temp_cnt
+
+    print('#{} {}'.format(tc+1, cnt))
+```
+
+```python
+# teacher solution 1
 for t in range(int(input())):
-    arr = [['-1']*15 for _ in range(5)]
-    ans = ''
-    for i in range(5):
-        inputV = input()
-        for j in range(len(inputV)):
-            arr[i][j] = inputV[j]
-    for j in range(15):
-        for i in range(5):
-            if arr[i][j] == '-1':
-                pass
-            else:
-                ans += arr[i][j]
+    str1 = input()
+    str2 = input()
+    dict = {}.fromkeys(str1, 0) # Dictionary 생성
+
+    for ch in str2:
+        if ch in dict:
+            dict[ch] += 1
+
+    print('#{} {}'.format(t+1, max(dict.values())))
+```
+
+```python
+# teacher solution 2
+for t in range(int(input())):
+    str1 = input()
+    str2 = input()
+
+    cnt = [0] * 138 # 문자를 배열의 인덱스로 사용한다.
+    for ch in str2:
+        cnt[ord(ch)] += 1
+
+    ans = 0
+    for ch in str1:
+        if cnt[ord(ch)]:
+            ans = max(ans, cnt[ord(ch)])
     print('#{} {}'.format(t+1, ans))
 ```
 
+### Stack1
+
+#### 4869. [파이썬 S/W 문제해결 기본] 4일차 - 종이붙이기
+
 ```python
-# 4613. 러시아 국기 같은 깃발
+def factorial(n):
+    result = 1
+    for i in range(1, n+1):
+        result *= i
+    return result
 
-# teacher solution 1
-for t in range(int(input())):
-    N, M = map(int, input().split())
-    arr = [input() for _ in range(N)]
+T = int(input())
 
-    ans = N*M
-    for i in range(0, N-3+1):
-        for j in range(i+1, N-2+1):
-            cnt = 0
-            for r in range(0, i+1):
-                for c in range(M):
-                    if arr[r][c] != 'W': cnt += 1
-            for r in range(i+1, j+1):
-                for c in range(M):
-                    if arr[r][c] != 'B': cnt += 1
+for tc in range(T):
+    N = int(input())
 
-            for r in range(j+1, N):
-                for c in range(M):
-                    if arr[r][c] != 'R': cnt += 1
-            ans = min(ans, cnt)
-    print('#{} {}'.format(t+1,ans))
-    
-# teacher solution 2 - 누적합 이용
-for t in range(int(input())):
-    N, M = map(int, input().split())
-    arr = [input() for _ in range(N)]
+    cnt = 0
+    b = N//10
+    for a in range(N//20+1):
+        b2 = b - 2*a
+        if b2 < 0:
+            b2 = 0
+        cnt += factorial(a+b2)*(2**a)/(factorial(a)*factorial(b2))
 
-    w = [0] * N
-    b = [0] * N
-    r = [0] * N
+    print('#{} {}'.format(tc+1,int(cnt)))
+```
+
+#### 4866. [파이썬 S/W 문제해결 기본] 4일차 - 괄호검사
+
+```python
+testcase = int(input())
+
+for tc in range(testcase):
+    line = input()
+    stack = [0]*100
+    top = -1
+    result = 1
+    for i in line:
+        if i == '('or i == '{':
+            top += 1
+            stack[top] = i
+        elif i == ')':
+            if top == -1:
+                result = 0
+                break
+            elif stack[top] == '(':
+                stack[top] = 0
+                top -= 1
+            else:
+                top += 1
+                stack[top] = i
+        elif i == '}':
+            if top == -1:
+                result = 0
+                break
+            elif stack[top] == '{':
+                stack[top] = 0
+                top -= 1
+            else:
+                top += 1
+                stack[top] = i
+
+        if i == line[-1]:
+            if stack == [0]*100:
+                result = 1
+            else:
+                result = 0
+
+    print('#{} {}'.format(tc+1, result))
+```
+
+#### 4871. [파이썬 S/W 문제해결 기본] 4일차 - 그래프 경로
+
+```python
+testcase = int(input())
+
+for tc in range(testcase):
+    vertex, line = map(int, input().split())
+    G = [[0 for _  in range(vertex+1)] for _ in range(vertex+1)]
+
+    for i in range(line):
+        x, y = map(int, input().split())
+        G[x][y] = 1
+
+    s, e = map(int, input().split())
+
+    stack = []
+    visited = [0]*(vertex+1)
+    v = s
+    stack.append(v)
+
+    road = 0
+    while (len(stack) > 0):
+        v = stack.pop(-1)
+
+        if visited[v] != 1:
+            visited[v] = 1
+            if v == e:
+                road = 1
+                break
+
+            for w in range(1, len(G[v])):
+                if G[v][w] == 1 and visited[w] == 0:
+                    stack.append(w)
+
+    print('#{} {}'.format(tc+1, road))
+```
+
+#### 4873. [파이썬 S/W 문제해결 기본] 4일차 - 반복문자 지우기
+
+```python
+testcase = int(input())
+
+for tc in range(testcase):
+    str = input()
+    stack = [0] * len(str)
+    top = -1
+    for i in str:
+        if top == -1:
+            top += 1
+            stack[top] = i
+        elif stack[top] == i:
+            stack[top] = 0
+            top -= 1
+        else:
+            top += 1
+            stack[top] = i
+
+
+    cnt = 0
+    for i in range(len(stack)):
+        if stack[i] != 0:
+            cnt += 1
+    print('#{} {}'.format(tc+1, cnt))
+```
+
+### Stack2
+
+#### 4874. [파이썬 S/W 문제해결 기본] 5일차 - Forth
+
+```python
+T = int(input())
+for t in range(T):
+    Fourth = list(map(str, input().split()))
+    math = ['+', '-', '*', '/']
+    stack = []
+
+    finalresult = 0
+    result = 0
+    for f in Fourth:
+        if f not in math and f != '.': # 숫자는 스택에 넣는다.
+            stack.append(f)
+        elif f in math and len(stack) >= 2:
+            num2 = int(stack.pop(-1))
+            num1 = int(stack.pop(-1))
+
+            if f == math[0]:
+                result = num1 + num2
+            elif f == math[1]:
+                result = num1 - num2
+            elif f == math[2]:
+                result = num1 * num2
+            elif f == math[3]:
+                result = num1 / num2
+            stack.append(result)
+
+        elif f == '.' and len(stack) == 1:
+            finalresult = int(stack.pop(-1))
+            break
+        else:
+            finalresult = 'error'
+            break
+
+
+    print('#{} {}'.format(t+1, finalresult))
+```
+
+#### 4875. [파이썬 S/W 문제해결 기본] 5일차 - 미로
+
+```python
+def notWall(x, y):
+    if 0 <= x < N and 0 <= y < N:
+        return True
+    else:
+        return False
+
+T = int(input())
+for t in range(T):
+    N = int(input())
+    maze = [list(map(int, input())) for _ in range(N)]
+    dir = [[-1, 0], [0, 1], [0, -1], [1, 0]]
+    visited = [[0 for _ in range(N)] for _ in range(N)]
+    stack = []
+
+    # 출발점 찾기
+    frag = 1
     for i in range(N):
-        w[i] = arr[i].count('W')
-        b[i] = arr[i].count('B')
-        r[i] = M - w[i] - b[i]
+        if frag == 0:
+            break
+        for j in range(N):
+            if maze[i][j] == 2:
+                sx, sy = i, j
+                flag = 1
+                break
 
-    for i in range(1, N):
-        w[i] += w[i - 1]
-        b[i] += b[i - 1]
-        r[i] += r[i - 1]
+    v = [sx, sy]
+    stack.append(v)
+    result = 0
 
-    ans = N * M
-    for i in range(0, N-3+1):
-        for j in range(i+1, N-2+1):
-            # 전체 칸 수 에서 바꿀 필요 없는 칸수 빼서 구하기
-            cnt = M * (i+1) - w[i]
-            cnt += M * (N - 1 - (j+1) + 1) - (r[N-1] - r[j])
+    while (len(stack) > 0):
+        x, y = stack.pop()
 
-            ans = min(ans, cnt)
-    print('#{} {}'.format(t+1,ans))
+        if result == 1:
+            break
+
+        if visited[x][y] != 1:
+            visited[x][y] = 1
+
+            for i in range(4):
+                nx = x + dir[i][0]
+                ny = y + dir[i][1]
+
+                if notWall(nx, ny) == True:
+                    if maze[nx][ny] == 0 and visited[nx][ny] == 0:
+                        stack.append([nx, ny])
+
+                    elif maze[nx][ny] == 3:
+                        result = 1
+                        break
+
+    print('#{} {}'.format(t+1, result))
 ```
+
+#### 4880. [파이썬 S/W 문제해결 기본] 5일차 - 토너먼트 카드게임
 
 ```python
 
 ```
 
-![image-20200313154918571](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200313154918571.png)
+#### 4881. [파이썬 S/W 문제해결 기본] 5일차 - 배열 최소 합
 
 ```python
 
 ```
 
-![image-20200313155511383](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200313155511383.png)
+### 큐 (Queue)
+
+#### 5097. [파이썬 S/W 문제해결 기본] 6일차 - 회전
 
 ```python
-
+for t in range(int(input())):
+    N, M = map(int, input().split())
+    lst = list(map(int, input().split()))
+    for _ in range(M):
+        lst.append(lst.pop(0))
+    print('#{} {}'.format(t+1, lst[0]))
 ```
 
-![image-20200313163453000](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200313163453000.png)
+#### 5099. [파이썬 S/W 문제해결 기본] 6일차 - 피자 굽기
 
-![image-20200313163809849](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200313163809849.png)
+```python
+for t in range(int(input())):
+    N, M = map(int, input().split())
+    pizza = list(map(int, input().split()))
+    oven = [[0,0]] * N
+    i = -1
+    result = []
+    while len(oven):
+        oven[0][1] = oven[0][1] // 2
+        if oven[0][1] == 0:
+            result.append(oven[0][0])
+            oven.pop(0)
+            i += 1
+            if i < M:
+                oven.append([i, pizza[i]])
+        else:
+            oven.append(oven.pop(0))
 
-![image-20200313164201852](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200313164201852.png)
+    print('#{} {}'.format(t+1,result[-1]+1))
+```
+

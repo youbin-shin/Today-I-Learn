@@ -240,6 +240,7 @@ settings > INSTLEED_APPS 에 `django_extensions` 추가 이걸 third-party app�
    article.content='second'
 
 3. Article.objects.create(title='third', content='django!!!') 
+   
    - instance 생성하지 않았고 save() 까지 완료해준다!!
 
 id는 마지막값으로 들어가니까 신경쓰지 말기
@@ -342,3 +343,8 @@ In [30]: article.delete()
 sqlmigrate
 
 showmigrations == status
+
+### migration
+
+- python  manage.py makemigrations
+- python manage.py migrate

@@ -672,11 +672,3 @@ for tc in range(T):
 
     print('#{} {}'.format(tc+1, Nk))
 ```
-
-```python
-
-```
-
-```python
-
-```
