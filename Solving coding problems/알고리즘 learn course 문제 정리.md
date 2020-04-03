@@ -712,3 +712,8 @@ for tc in range(int(input())):
     # 3에 도착한 것도 1을 추가해줬기에 -2를 해줘야한다.
 ```
 
+![image-20200403173354856](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200403173354856.png)
+
+![image-20200403173403527](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200403173403527.png)
+
+![image-20200403173454892](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200403173454892.png)
