@@ -590,3 +590,125 @@ for t in range(int(input())):
     print('#{} {}'.format(t+1,result[-1]+1))
 ```
 
+#### 5102. [파이썬 S/W 문제해결 기본] 6일차 - 노드의 거리
+
+```python
+for tc in range(int(input())):
+    V, E = map(int, input().split())
+    visited = [0] * (V + 1)
+    queue = []
+    G = [[] for _ in range(V + 1)] # 인접 리스트
+    for _ in range(E):
+        e1, e2 = map(int, input().split())
+        # 방향이 없기에 두번 추가해주기
+        G[e1].append(e2)
+        G[e2].append(e1)
+    start, goal = map(int, input().split())
+    queue.append(start)
+    visited[start] = True
+
+    result = 1
+    while queue:
+        t = queue.pop(0)
+        if t == goal:
+            result = visited[t]
+            break
+        for i in G[t]:
+            if not visited[i]:
+                queue.append(i)
+                visited[i] = visited[t] + 1
+
+    print('#{} {}'.format(tc+1,result-1))
+```
+
+#### 5105. [파이썬 S/W 문제해결 기본] 6일차 - 미로의 거리
+
+```python
+# solution 1
+for tc in range(int(input())):
+    # 초기 상태 설정
+    N = int(input())
+    maze = [list(map(int, input())) for _ in range(N)]
+    visited = [[0]*N for _ in range(N)]
+    queue = []
+
+    # 시작점 찾기
+    frag = 0
+    for i in range(N):
+        if frag == 1:
+            break
+        for j in range(N):
+            if maze[i][j] == 2:
+                frag = 1
+                start = [i, j]
+                visited[i][j] = 1
+                break
+	
+    # queue
+    result = N * N
+    queue.append(start)
+    dir = [[1, 0], [0, 1], [-1, 0], [0, -1]]
+    while queue:
+        t = queue.pop(0)
+        for d in range(4):
+            ix = t[0] + dir[d][0]
+            iy = t[1] + dir[d][1]
+            if 0 <= ix <N and 0<=iy<N and maze[ix][iy] != 1:
+                if maze[ix][iy] == 3:
+                    result = min(visited[t[0]][t[1]], result)
+                if not visited[ix][iy]:
+                    queue.append([ix, iy])
+                    visited[ix][iy] = visited[t[0]][t[1]] + 1
+    if result == N*N:
+        result = 1
+
+    print('#{} {}'.format(tc+1, result-1))
+```
+
+```python
+# solution 2
+# queue.pop 하여 도착점 확인! (이 방법을 권장함)
+for tc in range(int(input())):
+    # 초기 상태 설정
+    N = int(input())
+    maze = [list(map(int, input())) for _ in range(N)]
+    visited = [[0]*N for _ in range(N)]
+    queue = []
+
+    # 시작점 찾기
+    frag = 0
+    for i in range(N):
+        if frag == 1:
+            break
+        for j in range(N):
+            if maze[i][j] == 2:
+                frag = 1
+                start = [i, j]
+                visited[i][j] = 1
+                break
+
+    # queue
+    result = N * N
+    queue.append(start) # enqueue 부분
+    dir = [[1, 0], [0, 1], [-1, 0], [0, -1]]
+    while queue:
+        t = queue.pop(0)
+        if maze[t[0]][t[1]] == 3:
+            result = min(visited[t[0]][t[1]], result)
+        for d in range(4):
+            ix = t[0] + dir[d][0]
+            iy = t[1] + dir[d][1]
+            if 0 <= ix <N and 0<=iy<N and maze[ix][iy] != 1:
+
+                if not visited[ix][iy]:
+                    queue.append([ix, iy])
+                    visited[ix][iy] = visited[t[0]][t[1]] + 1
+    if result == N*N:
+        # 도착점 못 찾는 경우
+        result = 2
+
+    print('#{} {}'.format(tc+1, result-2))
+    # 처음 시작값 2를 발견했을 때 visited에 1을 넣었고
+    # 3에 도착한 것도 1을 추가해줬기에 -2를 해줘야한다.
+```
+
