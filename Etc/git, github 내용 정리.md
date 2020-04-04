@@ -105,6 +105,20 @@
 
 - git re~
 
+#### gitignore
+
+- project 에서 `git init` 한 후에 `touch.gitignore` 명령어로 만들면 된다.
+
+- https://www.gitignore.io/
+
+  - 위의 사이트에서 프로그램/언어(ex. django)를 입력하여 검색하면 찾을 수 있다.
+
+    ![gitignore](https://user-images.githubusercontent.com/60081201/78453288-a5c7e100-76cb-11ea-8c90-f3aabe84b2c5.JPG)
+
+- https://github.com/github/gitignore
+
+  - 언어는 gitignore에서 퀼리티가 낮아서 `github.gitignore` 에서 추가하는 것이 좋다.
+
 ### GitHub
 
 GitHub (https://github.com/)

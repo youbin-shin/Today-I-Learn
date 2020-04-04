@@ -1,9 +1,5 @@
 # Reference
 
-> 라이브강의에서 언급한 읽어볼만한 링크들입니다.
-
-
-
 ## 링크 안내
 
 | 문서 제목                                                    | 비고                                  | 일자 |
@@ -17,11 +13,11 @@
 | [Number](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Number) | (보충) 이러닝 내용 보강               | 3/12 |
 | [Abstract Equality Comparison Algorithm](http://ecma-international.org/ecma-262/5.1/#sec-11.9.3) | (선택) 결론은 ===                     | 3/12 |
 | [eqeq.js](https://eqeq.js.org)                               | (선택) JS 연산자 테이블 게임          | 3/12 |
-| [HTML Collection](https://developer.mozilla.org/ko/docs/Web/API/HTMLCollection) | (필수) HTML Collection 요소 | 3/16 |  
-| [NodeList](https://developer.mozilla.org/ko/docs/Web/API/NodeList) | (필수) NodeList 요소 | 3/16 |  
-| [이벤트 참조](https://developer.mozilla.org/ko/docs/Web/Events) | (필수) 다양한 이벤트의 종류 | 3/16 |  
-| [DOM-Level-3-Events](https://www.w3.org/TR/DOM-Level-3-Events/) | (보충) capturing & bubbling  | 3/16 |  
-| [Event](https://developer.mozilla.org/ko/docs/Web/API/Event) | (보충) 이벤트 객체 | 3/16 |  
+| [HTML Collection](https://developer.mozilla.org/ko/docs/Web/API/HTMLCollection) | (필수) HTML Collection 요소 | 3/16 |
+| [NodeList](https://developer.mozilla.org/ko/docs/Web/API/NodeList) | (필수) NodeList 요소 | 3/16 |
+| [이벤트 참조](https://developer.mozilla.org/ko/docs/Web/Events) | (필수) 다양한 이벤트의 종류 | 3/16 |
+| [DOM-Level-3-Events](https://www.w3.org/TR/DOM-Level-3-Events/) | (보충) capturing & bubbling  | 3/16 |
+| [Event](https://developer.mozilla.org/ko/docs/Web/API/Event) | (보충) 이벤트 객체 | 3/16 |
 | [Array Helper Methods](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) | (필수) forEach | 3/17 |
 | [First Class Function](https://developer.mozilla.org/ko/docs/Glossary/First-class_Function) | (보충) 일급 함수  | 3/17 |
 | [Closure](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Closures) | (보충) 클로저 | 3/17 |
