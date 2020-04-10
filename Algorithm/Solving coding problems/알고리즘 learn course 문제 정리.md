@@ -1146,4 +1146,26 @@ for tc in range(int(input())):
     printList(lst)
 ```
 
+```python
+# slicing
+tc = int(input())
+for t in range(1, tc + 1):
+    N, M, K = map(int, input().split())
+    base_list = list(map(int, input().split()))
+    idx = 0
+    for i in range(K):
+        idx += M
+        if idx > len(base_list):
+            idx = idx - len(base_list)
+        if idx == len(base_list):
+            base_list.append(base_list[0] + base_list[idx - 1])
+        else:
+            base_list[idx:0] = [base_list[idx - 1] + base_list[idx]]
+    result = base_list[-1:-11:-1]
+    result = ' '.join(map(str, result))
+    print('#{} {}'.format(t, result))
+```
+
+
+
 ### Tree
