@@ -368,7 +368,7 @@ cur가 가리키는 노드 다음으로 D값을 가진 노드를 삽입하는 �
 
 1. 메모리를 할당하여 새로운 노드 new를 생성하고 데이터 필드에 'D'를 저장한다.
 
-   ![image-20200410100803769](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200410100803769.png)
+   ![linkedlist](https://user-images.githubusercontent.com/60081201/78963271-edb69000-7b31-11ea-8ca4-831419e77e32.JPG)
 
    - 새로 추가되는 연결 노드 설정한 뒤 기존에 있던 연결 노드 설정하는 것이 실수를 줄일 수 있다.
 
@@ -380,7 +380,7 @@ cur가 가리키는 노드 다음으로 D값을 가진 노드를 삽입하는 �
 
 5. new의 주소를 new의 오른쪽 노드의 next에 저장하여 노드 new의 오른쪽 노드의 왼쪽 노드로 new를 연결한다.
 
-   ![image-20200410101615387](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200410101615387.png)
+   ![linkedlist2 JPG](https://user-images.githubusercontent.com/60081201/78963264-eb543600-7b31-11ea-83c3-a080c200f001.png)
 
  #### 삭제 연산
 
@@ -388,13 +388,95 @@ cur가 가리키는 노드 다음으로 D값을 가진 노드를 삽입하는 �
 
   삭제할 노드만 찾으면 된다.
 
-  ![image-20200410102033124](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200410102033124.png)
+  ![linkedlist3](https://user-images.githubusercontent.com/60081201/78963267-ed1df980-7b31-11ea-97f7-1fa188838a15.JPG)
 
   cur.prev.next = cur
 
   cur.next.prev = cur
 
 - 빈리스트일 경우, 처음 삭제/ 주중간 삭제/ 마지막 삭제
+
+#### 구현 코드 ★
+
+```python
+class Node:
+    def __init__(self, d=0, p=None, n=None):
+        self.data = d
+        self.prev = p
+        self.next = n
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.size = 0
+
+def addLast(lst, new): # 하나하나 인자를 lst에 추가하는 함수
+    if lst.head is None:
+        lst.head = lst.tail = new
+    else:
+        new.prev = lst.tail
+        lst.tail.next = new
+        lst.tail = new # 위 코드와 순서바뀌면 X
+    lst.size += 1
+
+def addList(lst, arr): # arr를 lst에 한번에 추가하는 함수
+    first = last = Node(arr[0])
+    for val in arr[1:]:
+        new = Node(val, last)
+        last.next = new
+        last = new
+
+    if lst.head is None:
+        lst.head, lst.tail = first, last
+    else:
+        cur = lst.head
+        while cur is not None:
+            if cur.data > arr[0]: break # 조건에 따라서 (변경가능)
+            cur = cur.next
+        if cur is None: # 마지막위치에 추가 (prev보다 먼저 해야함)
+            first.prev = lst.tail
+            lst.tail.next = first
+            lst.tail = last
+        elif cur.prev is None: # cur == lst.head 맨앞에 추가
+            last.next = lst.head
+            lst.head.prev = last
+            lst.head = first
+        else: # 중간
+            prev = cur.prev # prev 변수에 넣은 것 뿐!! 복잡해져서
+            first.prev = prev
+            last.next = cur
+            prev.next = first
+            cur.prev = last
+    lst.size += len(arr)
+
+
+def printList(lst): # 출력 코드
+    if lst.head is None: return
+    else:
+        cur = lst.head # 순서대로 출력하는 코드
+        while cur is not None: 
+            print(cur.data, end=' ')
+            cur = cur.next
+        print()
+        cur = lst.tail # 거꾸로 출력하는 코드
+        while cur is not None: 
+            print(cur.data, end=' ')
+            cur = cur.prev
+        print()
+
+mylist = LinkedList()
+
+arr = [1, 3, 5, 7, 9]
+# 1번
+for val in arr:
+    addLast(mylist, Node(val))
+printList(mylist)
+
+# 1번 코드와 동작 같다!
+addList(mylist, arr)
+printList(mylist)
+```
 
 #### Josephus Problem
 
@@ -472,10 +554,81 @@ print(arr)
 
 O(nlogn)
 
+#### 병합 정렬 과정
 
+{68, 10, 30, 2, 16, 8, 31, 22} 병합 정렬하는 과정
+
+1. 분할 단계 : 전체 자료 집합에 대하여 최소 크기의 부분집합이 될 때까지 분할 작업을 계속한다.
+
+![linkedlist 4JPG](https://user-images.githubusercontent.com/60081201/78963268-ed1df980-7b31-11ea-84c1-f8d1e94561c4.JPG)
+
+2. 병합 단계 : 2개의 부분집합을 정렬하면서 하나의 집합으로 병합
+
+```python
+# 분할 과정 수도코드
+def mergo_sort(m):
+    if len(m) <= 1: # 사이즈가 0이거나 1인 경우, 바로 리턴
+        return m
+    # 1. divide
+    mid = len(m) // 2
+    left = m[:mid]
+    right = m[mid:]
+    
+    # 리스트의 크기가 1이 될 때까지 merge_sort 재귀 호출
+    left = merge_sort(left)
+    right = merge_sort(right)
+    
+    # 2. conquer : 분할된 리스트 병합
+    return merget(left, right)
+```
+
+```python
+# 병합 과정 수도코드
+def merge(left, right):
+    result = [] # 두개의 분할된 리스트를 병합하여 result 만듦
+    
+    while len(left) > 0 and len(right) > 0: # 양쪽 리스트에 원소 남아있는 경우
+        # 두 서브 리스트의 첫 원소들을 비교하여 작은 것 부터 result에 추가
+        if left[0] <= right[0]:
+            result.append(left.pop(0))
+        else:
+            result.append(right.pop(0))
+            
+    if len(left) > 0: # 왼쪽 리스트에 원소가 남아있는 경우
+        result.extend(left)
+    if len(right) > 0: # 오른쪽 리스트에 원소가 남아있는 경우
+        result.extend(right)
+    return result
+```
 
 ### 리스트를 이용한 스택
 
 ### 우선순위 큐 (Priority Queue)
 
-### 실습
+- 구현
+  - 배열을 이용한 우선순위 큐
+  - 리스트를 이용한 우선순위 큐
+- 기본연산
+  - 삽입 : enQueue
+  - 삭제 : deQueue
+
+#### 배열을 이용한 우선순위 큐
+
+- 배열을 이용하여 자료 저장
+- 원소를 삽입하는 과정에서 우선순위를 비교하여 적절한 위치에 삽입하는 구조
+- 가장 앞에 최고 우선순위의 원소가 위치!
+- 문제점
+  - 배열을 사용하여 삽입/삭제 연산시 원소의 재배치 발생
+  - 소요시간이나 메모리 낭비 큼
+
+#### 리스트를 이용한 우선순위 큐
+
+- 연결 리스트를 이용하여 자료 저장
+- 원소를 삽입하는 과정에서 리스트 내 노드의 우너소드로가 비교하여 적절한 위치에 노드를 삽입하는 구조 
+- 리스트의 가장 앞쪽에 최고 우선순위가 위치
+
+- 장점
+  - 삽입/삭제 연산 이후 원소의 재배치 필요 X
+  - 메모리의 효율적인 사용 가능
+
+![image-20200410130448798](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200410130448798.png)

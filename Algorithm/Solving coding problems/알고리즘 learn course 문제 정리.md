@@ -720,7 +720,7 @@ for tc in range(int(input())):
 
 ### Linked List
 
-### 5108. [파이썬 S/W 문제해결 기본] 7일차 - 숫자 추가
+#### 5108. [파이썬 S/W 문제해결 기본] 7일차 - 숫자 추가
 
 ```python
 # Linked List
@@ -973,18 +973,177 @@ for tc in range(int(input())):
     print('#{} {}'.format(tc+1, result))
 ```
 
-
-
-#### 수열 합치기
+### 5110. [파이썬 S/W 문제해결 기본] 7일차 - 수열 합치기
 
 ```python
+# double linked list
+class Node:
+    def __init__(self, d=0, p=None, n=None):
+        self.data = d
+        self.prev = p
+        self.next = n
 
+class LinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.size = 0
+
+
+def addList(lst, arr):
+    first = last = Node(arr[0])
+    for val in arr[1:]:
+        new = Node(val, last)
+        last.next = new
+        last = new
+    if lst.head is None:
+        lst.head, lst.tail = first, last
+    else:
+        cur = lst.head
+        while cur is not None:
+            if cur.data > arr[0]: break
+            cur = cur.next
+        if cur is None: # 마지막위치에 추가 (prev보다 먼저 해야함)
+            first.prev = lst.tail
+            lst.tail.next = first
+            lst.tail = last
+        elif cur.prev is None: # cur == lst.head 맨앞에 추가
+            last.next = lst.head
+            lst.head.prev = last
+            lst.head = first
+        else: # 중간
+            prev = cur.prev # prev 변수에 넣은 것 뿐!! 복잡해져서
+            first.prev = prev
+            last.next = cur
+            prev.next = first
+            cur.prev = last
+    lst.size += len(arr)
+
+
+def printList(lst):
+    if lst.head is None: return
+    else:
+        cur = lst.tail
+        cnt = 0
+        while cur is not None:
+            if cnt == 10:
+                break
+            cnt += 1
+            print(cur.data, end=' ')
+            cur = cur.prev
+        print()
+
+
+for tc in range(int(input())):
+    N, M = map(int, input().split())
+    lst = LinkedList()
+    arr = list(map(int, input().split()))
+    addList(lst, arr)
+
+    for m in range(M-1):
+        temp = list(map(int, input().split()))
+        addList(lst, temp)
+    print('#{} '.format(tc+1), end='')
+    printList(lst)
 ```
 
-#### 암호
+```python
+# slicing
+for tc in range(int(input())):
+    # input
+    N, M = list(map(int, input().split()))
+    numbers = list(map(int, input().split())) # 처음 거는 인풋 받아서 만들고
+    for _ in range(M-1): # 그 다음부터는 이전 거랑 비교
+        temp_numbers = list(map(int, input().split()))
+        for idx in range(len(numbers)):
+            if numbers[idx] > temp_numbers[0]:
+                numbers[idx:idx] = temp_numbers
+                break
+        else: # break에 걸리지 않은 경우
+            numbers += temp_numbers
+    print("#%d %s" %(tc+1, ' '.join(list(map(str,numbers[::-1][:10])))))
+```
 
 ```python
+# list 참고용
+# 크기가 크면, ValueError: too many values to unpack 오류 발생
+for tc in range(int(input())):
+    N, M = map(int, input().split())
+    lst = list(map(int, input().split()))
+    for m in range(M):
+        temp = list(map(int, input().split()))
+        for n in range(len(lst)):
+            if lst[n] > temp[0]:
+                for i in range(len(temp)):
+                    lst.insert(n+i, temp[i])
+            elif n == len(lst)-1:
+                for i in range(len(temp)):
+                    lst.append(temp[i])
+    result = list(map(str, lst[::-1]))
+    print('#{}'.format(tc+1), end=' ')
+    print(' '.join(result[:10]))
+```
 
+#### 5120. [파이썬 S/W 문제해결 기본] 7일차 - 암호
+
+```python
+# 원형 이중연결 리스트
+# next, prev 에 None이 없다!!
+# tail은 따로 저장하지 않지만 head.prev 은 tail을 가리킴!
+
+class Node:
+    def __init__(self, d=0, p=None, n=None):
+        self.data = d
+        self.prev = p
+        self.next = n
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+        # self.tail = None
+        self.size = 0
+
+def printList(lst): # lst : LinkedList 객체
+    if lst.head is None: # 빈리스트 ( 항상 고려하고 주의하자! )
+        return
+    cur = lst.head.prev
+    for _ in range(min(lst.size, 10)):
+        print(cur.data, end=' ')
+        cur = cur.prev
+    print()
+
+def addLast(lst, new):
+    if lst.head is None:
+        lst.head = new
+        new.prev = new.next = new
+    else:
+        tail = lst.head.prev
+        new.prev = tail
+        new.next = lst.head
+        tail.next = new
+        lst.head.prev = new
+    lst.size += 1
+
+for tc in range(int(input())):
+    lst = LinkedList()
+    N, M, K = map(int, input().split())
+    arr = list(map(int, input().split()))
+    for val in arr:
+        addLast(lst, Node(val))
+
+    cur = lst.head
+    for _ in range(K):
+        for _ in range(M):
+            cur = cur.next
+
+        prev = cur.prev
+        new = Node(prev.data + cur.data, prev, cur)
+        prev.next = new
+        cur.prev = new
+        cur = new # 새로 추가된 위치를 시작위치로 재설정
+        lst.size += 1
+    print('#{}'.format(tc+1), end=' ')
+    printList(lst)
 ```
 
 ### Tree
