@@ -1171,7 +1171,26 @@ for t in range(1, tc + 1):
 #### 5174. [파이썬 S/W 문제해결 기본] 8일차 - subtree
 
 ```python
+def func(v):
+    global cnt
+    if v == 0: return
+    func(L[v])
+    cnt += 1
+    func(R[v])
 
+for t in range(int(input())):
+    E, N = map(int, input().split())
+    L = [0] * (E + 2)
+    R = [0] * (E + 2)
+    info = list(map(int, input().split()))
+    for i in range(0, len(info), 2):
+        parent, child = info[i], info[i + 1]
+        if L[parent]: R[parent] = child
+        else: L[parent] = child
+
+    cnt = 0
+    func(N)
+    print('#{} {}'.format(t+1, cnt))
 ```
 
 #### 이진탐색
@@ -1189,5 +1208,16 @@ for t in range(1, tc + 1):
 #### 5178. [파이썬 S/W 문제해결 기본] 8일차 - 노드의 합
 
 ```python
-
+# list 이용
+for t in range(int(input())):
+    N, M, L = map(int, input().split())
+    tree = [0] * (N + 2) # 0 인덱스 때문에 +1, 리프 노드의 오른쪽 노드가 없을 경우 IndexError 제거를 위해 +1
+    for _ in range(M):
+        a, b = map(int, input().split())
+        tree[a] = b
+    idx = N - M
+    while idx > 0:
+        tree[idx] = tree[idx * 2] + tree[idx * 2 + 1]
+        idx -= 1
+    print('#{} {}'.format(t+1, tree[L]))
 ```
