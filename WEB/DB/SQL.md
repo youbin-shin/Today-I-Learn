@@ -1,0 +1,620 @@
+# SQL
+
+2020.04.20
+
+> https://www.sqlitetutorial.net/
+
+### DB ?
+
+#### DBMS
+
+데이터 베이스 (DB)를 관리하는(Management) 시스템(System)
+
+계층형 데이터베이스, 관계형 데이터베이스, 객체지향 데이터베이스 등 존재
+
+#### RDBMS
+
+관계형 모델을 기반으로하는 데이터베이스 관리시스템 (가장 많이 활용)
+
+#### 관계형 데이터베이스
+
+- 관계형 데이터베이스는 관계를 열과 행으로 이루어진 테이블 집합으로 구성
+- 각 열을 특정 종류의 데이터를 기록
+- 테이블의 행은 각 객체/엔터티와 관련된 값의 모음
+
+#### 기본 용어
+
+- 스키마
+
+  데이터베이스에서 자료의 구조와 제약조건(구조, 표현방법, 관계 등)에 관한 전반적인 명세
+
+- 테이블 (관계)
+
+  열과 행의 모델을 사용해 조작된 데이터 요소들의 집합
+
+- column(열), 속성
+
+  각 열에는 고유한 데이터 형식이 있다.
+
+- row(행), 레코드
+
+  테이블의 데이터는 행으로 저장된다.
+
+- PK(Primary key, 기본키)
+
+  각 행의 고유값으로 저장된 레코드를 고유하게 식별할 수 있는 값
+
+## SQL
+
+### SQL intro
+
+#### 정의
+
+데이터베이스를 관리하기 위해 원하는 작업을 하기 위한 언어
+
+cf) django 에서 model (마이그레이션 파일, migreate) 와 SQL table 생성과 동일한 동작!!
+
+| 분류                                                     | 개념                                                         | 예시                                        |
+| -------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------- |
+| DDL - 데이터 정의 언어<br />(Data Definition Language)   | 데이터 정의<br />관계형 데이터베이스 구조(테이블, 스키마)를 정의하기 위한 명령어 | CREATE<br />DROP<br />ALTER                 |
+| DML - 데이터 조작 언어<br />(Data Manlpulation Language) | 데이터 저장, 수정, 삭제, 조회 등                             | INSERT<br />UPDATE<br />DELETE<br />SELECT  |
+| DCL - 데이터 제어 언어<br />(Data Control Language)      | 데이터베이스 사용자의 권한 제어 등                           | GRANT<br />REVOKE<br />COMMIT<br />ROLLBACK |
+
+#### 기본구조
+
+SQL(Structured Query Language)
+
+- 관계형 데이터베이스 관리시스템(RDBMS)의 데이터를 관리하기 위해 설계된 특수 목적의 프로그래밍 언어
+
+- RDBMS에서 자료의 검색과 관리, 데이터베이스 스키마 생성과 수정, 데이터베이스 접근 관리 등을 위해 고안됨.
+
+- 예시 Hello, world!
+
+  ```bash
+  $ sqlite3 db.sqlite3
+  sqlite> .tables
+  sqlite> .schema articles_article
+  sqlite> SELECT * FROM articles_article;
+  ```
+
+  - `.` : SQL x
+  - `;` 로 끝나는 것이 SQL
+
+#### 기본 데이터 베이스 활용법
+
+- SQLite 3 생성 접근 : `sqlite3 <filename>`
+- 테이블 목록 조회 : `.tables`
+- 특정 테이블 스키마 조회 : `.schema <table>`
+
+#### Datatype(SQLite)
+
+| Affinity |                                                              |
+| -------- | ------------------------------------------------------------ |
+| INTEGER  | TINYINT(1byte), SMALLINT(2bytes), MEDIUMINT(3bytes), INT(4bytes), BIGINT(8bytes), UNSIGNED BIG INT (+, -) |
+| TEXT     | CHARACTER(20), VARCHAR(255), TEXXT                           |
+| REAL     | REAL, DOUBLE, FLOAT                                          |
+| NUMBERIC | NUMERIC, DECIMAL, BOOLEAN, DATE, DATETIME                    |
+| BLOB     | no datatype specidi ed                                       |
+
+```bash
+# 예시 코드
+sqlite> CREATE TABLE classmates (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	name TEXT NOT NULL,
+	age INTEGER,
+	address TEXT
+);
+```
+
+- `NOT NULL` : 반드시 작성
+
+- `AUTOINCREMENT` 
+
+  SQLite 은 사용되지 않은 값이나 이전에 삭제된 마지막 행의 값을 재사용하지 못하게 하는 것
+
+  django 와 동작 동일하게! 반드시 붙여주기!
+
+- id, name, age, address 로 구조화
+
+#### 기본 코딩 구조
+
+> () 한것은 값 변경 가능
+
+```bash
+SELECT * FROM (articles_article);
+```
+
+- 키워드 : SELECT 문, FROM
+- 대소문자 구분없지만 키워드들은 대문자로 구분할 것이다.
+
+### SELECT
+
+SELECT 문은 데이터를 읽어올 수 있으며 특정한 테이블을 반환한다.
+
+```bash
+SELECT * FROM (table);
+```
+
+- `*`  : 전체 의미, 어떤 컬럼을 나열할지 바꿔주면 된다.
+
+### 테이블
+
+#### 생성
+
+```bash
+CREATE TABLE (table) (
+	(column1) datatype [constraints],
+	(column2) datatype [constraints],
+	...
+);
+```
+
+- constraints
+
+  PRIMARY KEY, NOT NULL, UNIQUE, DEFAULT 등
+
+- `users_user.sql` 파일을 생성하여 불러와도 된다.
+
+  ```sqlite
+  sqlite> .read users_user.sql
+  ```
+
+#### 삭제
+
+특정 테이블 삭제
+
+```bash
+DROP TABLE (table);
+```
+
+--> md 추가하기
+
+![image-20200420143148167](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200420143148167.png)
+
+![image-20200420143214135](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200420143214135.png)
+
+### CRUD
+
+#### 추가
+
+- 특정 테이블에 새로운 행을 추가하여 데이터를 추가
+
+  `INSERT INTO`, `VALUES`
+
+  ```bash
+  INSERT INTO table (column1, ...) VALUES (values1, ...);
+  ```
+
+  ```bash
+  # 예시 코드
+  sqlite> INSERT INTRO classmates (name, age) VALUES ('홍길동', 23)
+  ```
+
+- 모든 열에 데이터를 넣을 때에는 column 을 명시할 필요 없음.
+
+  ```bash
+  INSERT INTO table VALUES (value1, ...);
+  ```
+
+  ```bash
+  # 예시 코드
+  sqlite> INSERT INTRO classmates VALUES (2, '홍길동', 23, '서울')
+  ```
+
+#### 조회(읽기)
+
+- 특정 테이블에 특정 레코드를 조회
+
+  `SELECT * FROM`, `WHERE`
+
+  ```bash
+  SELECT * FROM table WHERE condition;
+  ```
+
+  ```bash
+  # 예시 코드
+  SELECT * FROM classmates WHERE id=1;
+  ```
+
+- 특정 테이블에 특정 레코드의 특정 column 조회
+
+  ```bash
+  SELECT column1, ... FROM table WHERE condition;
+  ```
+
+#### 삭제
+
+- 특정 테이블에 특정 레코드를 삭제
+
+  `DELETE FROM`, `WHERE`
+
+  ```bash
+  DELETE FROM table WHERE condition;
+  ```
+
+  ```bash
+  # 예시 코드
+  sqlite> DELETE FROM classmates WHERE id=4;
+  ```
+
+#### 수정
+
+- 특정 테이블에 특정 레코드를 수정
+
+  `UPDATE`, `SET`, `WHERE`
+
+  ```bash
+  UPDATE table SET column1=value1, ... WHERE condition;
+  ```
+
+  ```bash
+  # 예시 코드
+  sqlite> UPDATE classmates
+  SET name='홍길동', address='제주', WHERE id=4;
+  ```
+
+### SELECT 문
+
+#### 기본 구문
+
+```bash
+SELECT <column> FROM <table>
+[WHERE <condition>]
+[GROUP BY <column>]
+[ORDER BY <column [ASC/DESC]>]
+[LIMIT <integer>];
+```
+
+#### 읽기
+
+- 특정 테이블에 특정 레코드의 특정 column 조회
+
+  `SELECT`, `FROM`, `WHERE`
+
+  ```bash
+  SELECT column1, ... FROM table WHERE condition;
+  ```
+
+- 중복 없이 가져오기
+
+  `SELECT DISTINCT`
+
+  ```bash
+  SELECT DISTINCT column FROM table;
+  ```
+
+  ```bash
+  # 예시 코드
+  sqlite> SELECT DISTINCT name FROM classmates; # 동명이인 한명 이름만 
+  ```
+
+#### 표현식
+
+- 특정 테이블에 특정 레코드의 개수 : `COUNT()`
+
+  ```bash
+  SELECT COUNT(column) FROM table;
+  ```
+
+- 특정 테이블에 특정 레코드의 평균 : `AVG()`
+
+  ```bash
+  SELECT AVG(column) FROM table;
+  ```
+
+- 특정 테이블에 특정 레코드의 합 : `SUM()`
+
+  ```bash
+  SELECT SUM(column) FROM table;
+  ```
+
+- 특정 테이블에 특정 레코드의 최소값 : `MIN()`
+
+  ```bash
+  SELECT MIN(column) FROM table;
+  ```
+
+  ```bash
+  # 활용 예제
+  sqlite> SELECT name, MAX(age) FROM classmates;
+  ```
+
+- 특정 테이블에 특정 레코드의 최대값 : `MAX()`
+
+  ```bash
+  SELECT MAX(column) FROM table;
+  ```
+
+  ```bash
+  # 활용 예제
+  sqlite> SELECT MIN(age), MAX(age) FROM classmates;
+  ```
+
+#### WHERE
+
+```bash
+SELECT column FROM table WHERE condition;
+```
+
+- condition 예제 : age>=18, last_name='김', balance < 100000
+
+#### AND, OR
+
+조건 2개 이상
+
+```bash
+SELESELECT column FROM table WHERE condition1 [AND|OR] condition2;
+```
+
+```bash
+# 활용 예제
+sqlite> SELECT * FROM classmates WHERE name='김' and age>=18;
+```
+
+#### LIKE
+
+```bash
+SELECT * FROM table WHERE column LIKE 'patterns';
+```
+
+```bash
+# 활용 예제
+sqlite> SELECT * FROM classmates WHERE phone LIKE '010-%';
+```
+
+##### 와일드 카드
+
+- `%` : 문자열이 있을 수도 있고 없을 수도 있다.
+- `_` : 반드시 이자리에 '한 개'의 문자가 존재해야 한다.
+
+|     예     |                     의미                     |
+| :--------: | :------------------------------------------: |
+|     2%     |               2로 시작하는 값                |
+|     %2     |                2로 끝나는 값                 |
+|    %2%     |               2가 들어가는 값                |
+|    _2%     | 아무값이나 들어가고 두번째가 2로 시작하는 값 |
+|    1___    |           1로 시작하고 4자리인 값            |
+| 2_%_%/2__% |        2로 시작하고 적어도 3자리인 값        |
+
+#### ORDER BY
+
+- 특정 column 을 기준으로 정렬
+
+  `ORDER BY`, `ASC|DESC` - ASC(default) : 오름차순, DESC : 내림차순
+
+  ```bash
+  SELECT colums FROM table ORDER BY column1, column2, ASC|DESC;
+  ```
+
+  ```bash
+  SELECT colums FROM table ORDER BY column1 ASC|DESC column2 ASC|DESC;
+  ```
+
+  ```bash
+  # 활용 예제
+  sqlite> SELECT * FROM classmates ORDER BY age ASC name DESC;
+  ```
+
+- type 이 text 일 경우 
+
+  ```bash
+  # 활용 예제
+  sqlite> SELECT * FROM users ORDER BY balance LIMIT 3; # 1
+  
+  sqlite> SELECT * FROM users_without_schema ORDER BY balance LIMIT 3; # 2
+  ```
+
+  1번의 경우 99, 100 이렇게 잘 보이지만, 2번의 경우 text 이기에 100, 99 순으로 정렬됨을 주의하자
+
+#### LIMIT
+
+- 특정 table에서 원하는 개수만큼 가져오기
+
+  `LIMIT`, `OFFSET`
+
+  ```bash
+  SELECT colums FROM table LIMIT num;
+  ```
+
+  ```bash
+  # 활용 예제
+  sqlite> SELECT name FROM classmates LIMIT 10;
+  ```
+
+  ```bash
+  SELECT colums FROM table LIMIT num OFFSET num;
+  ```
+
+  ```bash
+  # 활용 예제
+  # 특정 table에서 원하는 개수만큼 가져오기
+  sqlite> SELECT name FROM classmates LIMIT 10 OFFSET 1;
+  ```
+
+#### GROUP BY
+
+- 특정 컬럼을 기준으로 그룹화 하기
+
+  `GROUP BY`
+
+  ```bash
+  SELECT colums FROM table GROUP BY num;
+  ```
+
+  ```sqlite
+  -- 활용 예제
+  sqlite> SELECT sex, COUNT(name) FROM classmates GROUP BY sex;
+  ```
+
+---
+
+### 실습
+
+```bash
+~/practice/0420/exercise/ $ sqlite3 practice.sqlite3
+SQLite version 3.22.0 2018-01-22 18:45:57
+Enter ".help" for usage hints.
+sqlite> .tables
+sqlite> CREATE TABLE classmates (
+# sqlite> CREATE IF NOT EXISTS TABLE classmates 위 코드와 동일 (단, 있을 경우 생성 x)
+   ...> id INTEGER PRIMARY KEY AUTOINCREMENT,
+   ...> name TEXT NOT NULL,                                         
+   ...> age INTEGER NOT NULL,
+   ...> address TEXT NOT NULL);
+sqlite> .tables
+classmates
+sqlite> .schema classmates
+CREATE TABLE classmates (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT NOT NULL,
+age INTEGER NOT NULL,
+address TEXT NOT NULL);
+
+#################### 기본 CRUD ########################
+# C
+sqlite> INSERT INTO classmates VALUES (1, '윱', 23, '경기도'); # 방법1
+sqlite> INSERT INTO classmates (name, age, address) VALUES ('깉', 9, '경기도'); # 방법2 (기본적으로 이용하기, 내부적으로 rowid라는 column이 자동적으로 주어짐.)
+
+# R (가장 중요)
+sqlite> SELECT * FROM classmates; # 전체 조회
+id | name | age | address
+1 | 윱 | 23 | 경기도
+2 | 깉 | 9 | 경기도
+sqlite> .mode column # 조회 보기 좋게~
+sqlite> SELECT * FROM classmates;
+id          name        age         address   
+----------  ----------  ----------  ----------
+1           윱           23          경기도       
+2           깉           9           경기도    
+sqlite> SELECT name, age FROM classmates; # 일부 조회
+name        age       
+----------  ----------
+윱           23        
+깉           9 
+
+# U
+sqlite> UPDATE classmates SET name='빙' WHERE id=1;
+sqlite> SELECT * FROM classmates; # 수정 확인 (전체 조회)
+id          name        age         address   
+----------  ----------  ----------  ----------
+1           빙           23          경기도       
+2           깉           9           경기도 
+
+# D
+sqlite> DELETE FROM classmates WHERE id=1;
+sqlite> SELECT * FROM classmates; # 삭제 확인 (전체 조회)
+id          name        age         address   
+----------  ----------  ----------  ----------
+2           깉           9           경기도    
+
+############################################
+# C 한번에 여러개 데이터 넣기
+sqlite> INSERT INTO classmates (name, age, address) VALUES ('신', 22, '서울'), ('유', 23, '경기도');
+sqlite> SELECT * FROM classmates;
+id          name        age         address   
+----------  ----------  ----------  ----------
+2           깉           9           경기도       
+3           신           22          서울        
+4           유           23          경기도     
+
+# R 중복 없애기
+sqlite> SELECT address FROM classmates;
+address   
+----------
+경기도       
+서울        
+경기도       
+sqlite> SELECT DISTINCT address FROM classmates;
+address   
+----------
+경기도       
+서울   
+
+#################### 표현식 ########################
+sqlite> SELECT COUNT(*) FROM classmates; # 데이터 갯수 파악
+COUNT(*)  
+----------
+3   
+sqlite> SELECT MAX(age) FROM classmates; # 최대 나이 조회                             
+MAX(age)  
+----------
+23        
+sqlite> SELECT name,  MAX(age) FROM classmates; # 최대 나이와 그 나이의 이름 조회           
+name        MAX(age)  
+----------  ----------
+유           23       
+sqlite> SELECT *,  MAX(age) FROM classmates; # 최대 나이의 그 행 모두 출력              
+id          name        age         address     MAX(age)  
+----------  ----------  ----------  ----------  ----------
+4           유           23          경기도         23   
+
+#################### AND/OR ########################
+sqlite> SELECT * FROM classmates WHERE name='유' OR age='9';         
+id          name        age         address   
+----------  ----------  ----------  ----------
+2           깉           9           경기도       
+4           유           23          경기도
+
+#################### LIKE ########################
+sqlite> SELECT * FROM classmates WHERE name LIKE '신%'; # 신으로 시작하는 name을 가진 모든 데이터 출력
+id          name        age         address   
+----------  ----------  ----------  ----------
+3           신           22          서울   
+sqlite> SELECT * FROM classmates WHERE name LIKE '신_'; # 신으로 시작하고 두글자인 데이터 출력
+
+#################### ORDER BY ########################
+sqlite> SELECT * FROM classmates ORDER BY age; # 조회를 오름차순할 뿐 정렬 변화 X, 기본 ASC
+id          name        age         address   
+----------  ----------  ----------  ----------
+2           깉           9           경기도       
+3           신           22          서울        
+4           유           23          경기도
+sqlite> SELECT * FROM classmates ORDER BY age DESC; # 조회 내림차순
+id          name        age         address   
+----------  ----------  ----------  ----------
+4           유           23          경기도       
+3           신           22          서울        
+2           깉           9           경기도     
+
+#################### LIMIT ######################## 조회시에 개수 정의
+sqlite> SELECT * FROM classmates ORDER BY age DESC LIMIT 1; # 나이가 가장 많은 사람 출력
+id          name        age         address   
+----------  ----------  ----------  ----------
+4           유           23          경기도       
+
+#################### OFFSET ########################
+sqlite> SELECT * FROM classmates ORDER BY age DESC LIMIT 2 OFFSET 1;
+id          name        age         address   
+----------  ----------  ----------  ----------
+3           신           22          서울        
+2           깉           9           경기도
+
+
+#################### GROUP BY ########################
+sqlite> SELECT COUNT(address) FROM classmates GROUP BY address;COUNT(address) # 조건(address) 에 대한 그룹을 만들고 count를 해준다.
+--------------
+2             
+1             
+sqlite> SELECT address,  COUNT(address) FROM classmates GROUP BY address; # 그룹 조회!!
+address     COUNT(address)
+----------  --------------
+경기도         2             
+서울          1  
+sqlite> SELECT address,  COUNT(address) FROM classmates GROUP BY address ORDER BY  COUNT(address) DESC;                                     
+address     COUNT(address)
+----------  --------------
+경기도         2             
+서울          1             
+sqlite> SELECT address,  COUNT(address) AS numbers  FROM classmates GROUP BY address ORDER BY  COUNT(address) DESC;  # numbers로 이름 바꿔줄 수 있음. AS는 추가개념 참고용 
+address     numbers   
+----------  ----------
+경기도         2         
+서울          1  
+```
+
+- `.exit` 를 통해 나올 수 있다.
+
+- `DROP TABLE (테이블 이름)` : 테이블 지우기
+
+
+
