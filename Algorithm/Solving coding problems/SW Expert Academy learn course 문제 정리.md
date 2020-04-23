@@ -1196,13 +1196,59 @@ for t in range(int(input())):
 #### 이진탐색
 
 ```python
+def makeT(n):
+    global idx
+    global N
+    if n <= N:
+        makeT(n*2) # 왼쪽 서브트리 방문
+        tree[n] = idx # 중위 순회로 현재 노드값 저장
+        idx += 1
+        makeT(n*2+1) # 오른쪽 서브트리 방문
 
+
+for tc in range(int(input())):
+    N = int(input())
+    idx = 1
+    tree = [0 for _ in range(N+1)] # 리스트를 이용한 완전 이진 트리 저장장
+   makeT(1)
+    print('#{} {} {}'.format(tc+1, tree[1], tree[N//2]))
 ```
 
-#### 이진 합
+#### 이진 힙
 
 ```python
+def enq(n):
+    global last
+    last += 1 # 마지막 노드번호 증가
+    c = last # 마지막 노드를 자식 노드로
+    p = c//2 # 부모 노드 번호 계산
+    q[last] = n # 마지막 노드에 값 저장
+    while c>1 and q[p] > q[c]: # 루트가 아니고 부모 노드의 값이 더 크면
+        t = q[p] # 저장된 값 바꿈
+        q[p] = q[c]
+        q[c] = t
+        c = p # 부모를 새로운 자식 노드로
+        p = p//2
 
+def find(): # 마지막 노드의 조상 노드 찾기
+    global N
+    c = N
+    p = c//2
+    s = 0
+    while p > 0:
+        s += q[p] # 조상 노드 값을 더함
+        p = p//2
+    return s
+
+for tc in range(int(input())):
+    N = int(input())
+    last = 0 # 노드가 하나도 없는 상태
+    q = [0 for i in range(N+1)] # 이진 힙 구현을 위한 리스트 생성    
+    L = list(map(int, input().split()))
+
+    for i in range(N): # 힙에 저장
+        enq(L[i])
+    print('#{} {}'.format(tc+1, find()))
 ```
 
 #### 5178. [파이썬 S/W 문제해결 기본] 8일차 - 노드의 합
@@ -1221,3 +1267,4 @@ for t in range(int(input())):
         idx -= 1
     print('#{} {}'.format(t+1, tree[L]))
 ```
+
