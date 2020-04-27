@@ -185,12 +185,3 @@ DTL을 통해 HTML 생성
 
 ![0422](https://user-images.githubusercontent.com/60081201/80098769-6264e200-85a8-11ea-9f35-1fcc47473e24.JPG)
 
----
-
-### 1 : N
-
-### M : N
-
-새로운 테이블이 새로 생성
-
-1:N, 1:N 합쳐진 테이블
