@@ -1,6 +1,4 @@
-# 알고리즘 learn course
-
->  Programming - intermediate
+# Programming  intermediate
 
 ### LIST1
 
