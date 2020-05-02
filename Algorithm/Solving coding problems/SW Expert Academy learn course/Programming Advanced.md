@@ -42,7 +42,7 @@ for tc in range(int(input())):
     print('#{} {}'.format(tc + 1, num_2))
 ```
 
-- 파이썬 라이브러리 최대로 활용
+- 파이썬 라이브러리 최대로 활용하여 문제 풀기
 
 ```python
 for tc in range(int(input())):
@@ -56,7 +56,28 @@ for tc in range(int(input())):
     print(t)
 ```
 
-![image-20200501124342328](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200501124342328.png)
+- dictionary 이용하여 문제 풀기
+
+```python
+hex_number = {'0':0,'1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'A':10,'B':11,'C':12,'D':13,'E':14,'F':15}
+
+def GetResult(n, str_num):
+    ret = ''
+    for i in range(n):
+        number = hex_number[str_num[i]]
+        tmp_ret = ''
+        for j in range(3, -1, -1):
+            bit = str((number >> j) & 1)
+            tmp_ret += bit
+        ret += tmp_ret
+    return ret
+
+
+for tc in range(int(input())):
+    N, input_number = map(str, input().split())
+    N = int(N)
+    print('#{} {}'.format(tc+1, GetResult(N, input_number)))
+```
 
 #### 5186. [파이썬 S/W 문제해결 구현] 1일차 - 이진수2 
 
