@@ -185,3 +185,12 @@ DTL을 통해 HTML 생성
 
 ![0422](https://user-images.githubusercontent.com/60081201/80098769-6264e200-85a8-11ea-9f35-1fcc47473e24.JPG)
 
+---
+
+### 참고 ERD
+
+- ERD (Entity-Relationship Diagram)
+
+  - ERM 프로세스의 산출물을 가리켜 개체-**관계** 다이어그램
+
+    ![erd](https://user-images.githubusercontent.com/60081201/80913715-c1351300-8d81-11ea-9bb0-bc27529942eb.JPG)
