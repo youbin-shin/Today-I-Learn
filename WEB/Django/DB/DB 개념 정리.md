@@ -194,3 +194,11 @@ DTL을 통해 HTML 생성
   - ERM 프로세스의 산출물을 가리켜 개체-**관계** 다이어그램
 
     ![erd](https://user-images.githubusercontent.com/60081201/80913715-c1351300-8d81-11ea-9bb0-bc27529942eb.JPG)
+
+- ERD 관련 작성 사이트
+  - https://www.erdcloud.com/  "추천"
+  - draw.io
+  
+- 참고 이미지
+
+  https://www.erdcloud.com/d/PK2Ae7d4asTRqHpHx
