@@ -127,9 +127,9 @@ DTL을 통해 HTML 생성
 
 - Class => Camel Case
 
-- 변수명/메서드 함수 => snake case
+- 변수명/메서드 함수 => snake_case
 
-- setting.py => 대문자 snake case
+- setting.py => 대문자 snake_case
 
   ---
 
