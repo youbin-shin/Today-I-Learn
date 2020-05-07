@@ -10,7 +10,7 @@
 >   - 순열, 조합, 부분집합을 생성하는 알고리즘 학습
 > - 탐욕 알고리즘 기법의 개념과 주요 특성 이해
 
-### 반복(Iteration)과 재귀(Recursion)
+## 반복(Iteration)과 재귀(Recursion)
 
 - 반복과 재귀는 유사한 작업 수행 가능
 - 반복은 수행하는 작업이 완료될 때까지 계속 반복 → 루프 (for, while 구조)
@@ -18,7 +18,7 @@
   - 하나의 큰 문제를 해결할 수 있는(해결하기 쉬운) 더 작은 문제로 쪼개고 결과들을 결합
   - 재귀 함수로 구현
 
-#### 반복 구조
+### 반복 구조
 
 1. 초기화 → (조건검사 → 명령문 실행 → 업데이트) 괄호를 반복하다 조건검사를 통해 끝남  
 2. 초기화 → (명령문 실행 → 업데이트 → 조건검사) 괄호를 반복하다 조건검사를 통해 끝남
@@ -40,7 +40,7 @@ def SelectionSort(A):
         A[min], A[i] = A[i], A[min]
 ```
 
-#### 재귀적 알고리즘
+### 재귀적 알고리즘
 
 - 재귀적 정의는 두 부분으로 나뉜다.
 
@@ -54,7 +54,7 @@ def SelectionSort(A):
 
      새로운 집합의 원소를 생성하기 위해 결합되어지는 방법
 
-#### 재귀 함수 (recursive function)
+### 재귀 함수 (recursive function)
 
 - 함수 내부에서 직접 혹은 간접적으로 자기 자신을 호출하는 함수
 
@@ -70,7 +70,7 @@ def SelectionSort(A):
 
   `호출 → 호출 → ... return → return ... : 프로그램 메모리 구조`
 
-##### 펙토리얼 재귀 함수
+#### 펙토리얼 재귀 함수
 
 - 재귀적 정의
 
@@ -84,7 +84,7 @@ def SelectionSort(A):
         else: return n * fact(n-1) # Inductive part
     ```
 
-#### 반복 vs 재귀
+### 반복 vs 재귀
 
 - 해결할 문제를 고려해서 반복이나 재귀의 반복 선택
 - 재귀는 문제 해결을 위한 알고리즘 설계가 간단하고 자연스러움.
@@ -102,7 +102,7 @@ def SelectionSort(A):
 | **소스 코드 형태** |              선택 구조 (if ... else)               | 반복 구조 (for, while) |
 |  **무한 반복시**   |                  스택 오버플로우                   |  CPU를 반복해서 점유   |
 
-##### 2^k 연산에 대한 재귀와 반복
+#### 2^k 연산에 대한 재귀와 반복
 
 - 재귀
 
@@ -126,7 +126,7 @@ def SelectionSort(A):
       return power
   ```
 
-#### 연습문제 1
+### 연습문제 1
 
 선택 정렬 함수 (SelecionSort)를 재귀적 알고리즘으로 작성해 보시오.
 
@@ -155,9 +155,9 @@ def SelectionSort(A):
   print(A) # [0, 1, 2, 4, 6, 7, 8, 9]
   ```
 
-### 완전검색기법
+## 완전검색기법
 
-#### 완전 검색
+### 완전 검색
 
 - 많은 종류의 문제들이 특정 조건을 만족하는 경우나 요소를 찾는 것이다.
 
@@ -170,7 +170,7 @@ def SelectionSort(A):
 - 이를 기반으로 그리디 기법이나 동적 계획법을 이용해서 효율적인 알고리즘을 찾을 수 있다.
 - 검정등에서 주어진 문제를 풀 때, 우선 **완전 검색으로 접근하여 해답을 도출**한 후, **성능 개선을 위해 다른 알고리즘을 사용하고 해답을 확인**하는 것이 바람직하다.
 
-#### 고지식한 방법 (brute-force)
+### 고지식한 방법 (brute-force)
 
 - brute-force : 문제 해결을 위한 간단하고 쉬운 접근법
   - "Just do it"
@@ -180,7 +180,7 @@ def SelectionSort(A):
 - 문제에 포함된 자료(요소, 인스턴스)의 크기가 작다면 유용하다.
 - 학술적 또는 교육적 목적을 위해 알고리즘의 효율성을 판단하기 위한척도로 사용된다.
 
-##### Brute-force 탐색 (sequential search)
+#### Brute-force 탐색 (sequential search)
 
 - 자료들의 리스트에서 키 값을 찾기 위해 첫 번째 자료부터 비교하면서 진행한다.
 
@@ -198,35 +198,271 @@ def SelectionSort(A):
       else: return 1
   ```
 
-#### 문제 제시 : Baby-gin Game
+## 조합적 문제
 
-- 0 ~ 9 사이의 숫자 카드에서 임의의 카드 6장을 뽑았을 때, 3장의 카드가 연속적이 번호를 갖는 경우를 run이라 하고, 3장의 카드가 동일한 번호를 갖는 경우를 triplet이라고 한다.
-- 6장의 카드가 run과 triplet로만 구성된 경우를 baby-gin으로 부른다. 
-- 6자리의 숫자를 입력받아 baby-gin 여부를 판단하는 프로그램을 작성하라.
+### 순열 (Permutation)
+
+- 서로 다른 것들 중  몇 개를 뽑아서 한 줄로 나열하는 것
+
+- 서로 다른 n 개 중 r개를 택하는 순열 표현 : n P r
+
+  - nPr = n x (n-1) x (n-2) x ... x (n-r+1)
+  - nPn = n!
+
+- 다수의 알고리즘 문제들은 순서화된 요소들의 집합에서 최선의 방법을 찾는 것과 관련 있다.
+
+  ex) TSP (Traveling Salesman Problem)
+
+- N개의 요소들에 대해서 n! 개의 순열들이 존재한다.
+
+  - 12! = 479,001,600
+  - n > 12 인 경우, 시간 복잡도 폭발적으로 증가!
+
+#### 단순하게 순열을 생성하는 방법
+
+```python
+# {1, 2, 3}을 포함하는 모든 수열을 생성하는 함수
+for i1 in range(3):
+    for i2 in range(3):
+        if i2 != i1:
+            for i3 in range(3):
+                if i3 != i1 and i3 != i2:
+                    print(i1, i2, i3)
+```
+
+#### 순열 생성 방법
+
+- 사전적 순서 (Lexicographic-Order)
+- 최소 변경을 통한 방법(Minimum-exchange requirement)
+  
+- 각각의 순열들은 이전의 상태에서 단지 두 개의 요소들 교환을 통해 생성
+  
+- **재귀 호출을 통한 순열 생성 1**
+
+  교환을 이용하나 최소한의 경로는 아님.
+
+  ```python
+  # arr[] : 데이터가 저장된 배열
+  
+  def perm(k, N):
+      if k == N:
+          # 원하는 작업 수행
+          print(arr)
+      else:
+          for i in range(k, N): # k 번째 원소를 i 번째 원소와 교환하여 저장
+              arr[k], arr[i] = arr[i], arr[k]
+              perm(k + 1, N)
+              arr[k], arr[i] = arr[i], arr[k] # 리턴 후 i 번째 원소가 배제되지 않게 복구
+  arr = ['A','B', 'C'] # 순열 만들 리스트
+  perm(0, 3)
+  ```
+
+- **재귀 호출을 통한 순열 생성 2**
+
+  ```python
+  # arr[] : 데이터가 저장된 배열
+  # n : 원소의 개수, i: 선택된 원소의 수
+  # visited[N-1] : 방문 여부, t : 결과 저장 배열
+  
+  def perm(k):
+      if (k==n): print(arr)
+      else:
+          for i in range(n-1):
+              if not visited[i]:
+                  t[k] = arr[i]
+                  visited[i] = True
+                  perm(k+1)
+                  visited[i] = False
+  ```
+
+### 연습 문제 2 : Baby-gin Game
+
+6자리 숫자에 대해서 완전 검색을 적용해서 Baby-gin 을 검사해보시오.
+
+- About Baby-gin
+  - 0 ~ 9 사이의 숫자 카드에서 임의의 카드 6장을 뽑았을 때, 3장의 카드가 연속적이 번호를 갖는 경우를 run이라 하고, 3장의 카드가 동일한 번호를 갖는 경우를 triplet이라고 한다.
+  - 6장의 카드가 run과 triplet로만 구성된 경우를 baby-gin으로 부른다. 
+  - 6자리의 숫자를 입력받아 baby-gin 여부를 판단하는 프로그램을 작성하라.
 
 - 입력 예
+
+  ```markdown
+  124783
+  667767
+  054060
+  101123
+  ```
 
   - 667767은 두 개의 triplet이므로 baby-gin이다. (666, 777)
   - 054060은 한 개의 run과 한 개의 triplet이므로 baby-gin이다. (456, 000)
   - 101123은 한 개의 triplet만 존재하므로 baby-gin이 아니다.
 
-  ---
-
-- 완전 검색을 통한 Baby-gin 접근
+- 접근 포인트
 
   1. 고려할 수 있는 모든 경우의 수 생성하기
 
-     6개의 숫자로 만들 수 있는 모든 숫자 나열 (중복 포함)
-
-     순열을 생성한다.
+     6개의 숫자로 만들 수 있는 모든 숫자 중복 포함하여 순열로 생성한다.
 
   2. 해답 테스트하기
 
      앞의 3자리와 뒤의 3자리를 잘라, run와 triplet 여부를 테스트하고 최종적으로 baby-gin을 판단한다.
 
-### 조합적 문제
+- 코드 풀이
 
-### 탐욕 알고리즘
+  ```python
+  def perm2(n, k):
+      global chk
+      if chk: return
+      if k == n:
+          # print(ta)
+          t = r = 0
+          if ta[0] == ta[1] and ta[1] == ta[2]:
+              t+= 1
+          if ta[3] == ta[4] and ta[4] == ta[5]:
+              t+= 1
+          if ta[0] + 1 == ta[1] and ta[1] + 1 == ta[2]:
+              r+= 1
+          if ta[3] + 1 == ta[4] and ta[4] + 1 == ta[5]:
+              r+= 1
+          if t + r == 3: chk = True
+      else: # if k!= n
+          for i in range(n):
+              if not visited[i]:
+                  ta[k] = arr[i]
+                  visited[i] = True
+                  perm2(n, k + 1)
+                  visited[i] = False    
+  ```
+
+### 부분 집합
+
+- 집합에 포함된 원소들을 선택하는 것이다.
+
+- 다수의 중요 알고리즘들이 원소들의 그룹에서 최적의 부분 집합을 찾는 것이다.
+
+  ex) 배낭 짐싸기 (knapsack)
+
+- N 개의 원소를 포함한 집합
+
+  - 자기 자신과 공집합 포함한 모든 부분집합(power set)의 개수 : 2^n 개
+  - 원소의 수가 증가하면 부분집합의 개수는 지수적으로 증가
+
+#### 단순하게 모든 부분 집합 생성하는 방법
+
+```python
+# 3개 원소를 포함한 집합에 대한 power set 구하기
+for i1 in range(2):
+    bit[0] = i1 # 0번째 원소
+    for i2 in range(2):
+        bit[i] = i2 # 1번째 원소
+        for i3 in range(2):
+            bit[2] = i3 # 2번째 원소
+            print(array)
+```
+
+#### 부분집합 생성 방법
+
+##### 바이너리 카운팅 (Binary Counting)
+
+- 원소 수에 해당하는 N개의 비트열을 이용한다.
+- n번째 비트값이 1이면 n번째 원소가 포함되었음을 의미한다.
+
+| 10진수 | 이진수 | {A, B, C, D} |
+| :----: | :----: | :----------: |
+|   0    |  0000  |      {}      |
+|   1    |  0001  |     {A}      |
+|   2    |  0010  |     {B}      |
+|   3    |  0011  |    {A, B}    |
+|   4    |  0100  |     {C}      |
+|   5    |  0101  |    {A, C}    |
+|   6    |  0110  |    {B, C}    |
+|   7    |  0111  |  {A, B, C}   |
+|   8    |  1000  |     {D}      |
+|   9    |  1001  |    {A, D}    |
+|   10   |  1010  |    {B, D}    |
+|   11   |  1011  |  {A, B, D}   |
+|   12   |  1100  |    {C, D}    |
+|   13   |  1101  |  {A, C, D}   |
+|   14   |  1110  |  {B, C, D}   |
+|   15   |  1111  | {A, B, C, D} |
+
+##### 바이너리 카운팅을 통한 부분집합 생성 코드 예
+
+```python
+arr = [3, 6, 7, 1, 5, 4]
+n = len(arr)
+for i in range(0, (1<<n)): # 1<<n : 부분집합의 개수
+    for j in range(0, n): # 원소의 수만큼 비트를 비교함
+        if i & (1<<j): # i의 j번째 비트가 1이면 j 번째 원소 출력
+            print('%d'%arr[j], end='')
+    print()
+```
+
+### 연습문제 3 : 부분집합 합 문제
+
+- 아래의 10개 정수 집합에 대한 모든 부분 집합 중 원소의 합이 0 이 되는 부분 집합을 모두 출력하시오.
+
+- 예 : {-1, 3, -9, 6, 7, -6, 1, 5, 4, -2}
+
+- 코드 풀이
+
+  ```python
+  arr = [-1, 3, -9, 6, 7, -6, 1, 5, 4, -2]
+  n = len(arr)
+  
+  for i in range(0, 1<<n):
+      tr = []
+      for j in range(0, n): # 원소의 수만큼 비트를 비교함
+          if i & (1<<j): # i의 j번째 비트가 1이면 j번째 원소 출력
+              tr.append(arr[j])
+              # print('%d'%arr[j], end='')
+      if sum(tr) == 0:
+          print(tr)
+  ```
+
+### 조합
+
+- 서로 다른 n개의 원소 중 r개를 순서 없이 골라낸 것을 조합 (Combination)이라 한다.
+
+- 조합의 수식
+  - nCr = n!/((n-r)! * r!), (n >= r)
+  - nCr = n-1Cr-1 + n-1Cr `재귀적 표현`
+  - nC0 = 1
+
+#### 재귀 호출을 이용한 조합 생성 알고리즘 1
+
+```python
+# an[] : n개의 원소를 가지고 있는 배열
+# tr[] : r개 크기의 배열, 조합이 임시 저장될 배열
+
+def comb(n, r):
+    if (r==0): print(arr)
+    elif (n < r): return # 예외케이스 처리를 위해
+    else:
+        tr[r-1] = an[n-1]
+        comb(n-1, r-1) # 데이터 있을 경우
+        comb(n-1, r) # 데이터 없을 경우
+```
+
+![image-20200506152113375](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200506152113375.png)
+
+![image-20200506152234944](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200506152234944.png)
+
+#### 재귀 호출을 이용한 조합 생성 알고리즘 2
+
+```python
+# an[] : n개의 원소를 가지고 있는 배열
+# tr[] : r개 크기의 배열, 조합이 임시 저장될 배열
+
+def comb(k, s): # 깊이, 시작 숫자
+    if (r==0): print(arr)
+    else:
+        for i in range(s, n-r+k):
+            t[k] = a[i]
+            comb(k+1, i+1)
+```
+
+## 탐욕 알고리즘
 
 
 
