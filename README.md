@@ -1,12 +1,12 @@
 # Today I Learned :pencil2:
 
-하루 동안 배운 내용을 정리하고 복습하는 저장소입니다.
+하루 동안 배운 내용을 정리하고 복습하는 저장소입니다.​ :happy:
 
 
 
-## category :happy:
+## :star: category 
 
-### APS (Algorithm Problem Solving)
+### :one: APS (Algorithm Problem Solving)
 
 #### Programming Intermediate
 
@@ -78,7 +78,7 @@
 
 ---
 
-### WEB
+### :two: WEB
 
 - Static WEB
   - HTML
@@ -89,7 +89,7 @@
 - Django
 - JavaScript
 
-### Python
+### :three: Python
 
 1. python intro
 2. control of flow
@@ -102,7 +102,7 @@
 
 - Python Key Point
 
-### 컴퓨터 사고력 
+### :four: 컴퓨터 사고력 
 
 1. 프로그래밍과 논리, 수학
 2. 수의 표현
@@ -111,7 +111,7 @@
 5. 재귀
 6. 동적 프로그래밍 DP
 
-### etc
+### :five: etc
 
 - git, github 내용 정리
 
