@@ -1,4 +1,4 @@
-# chapter 4. 분할정복 & 백트래킹
+# chapter 4. 분할정복
 
 2020.05.04
 
@@ -284,8 +284,6 @@ print(arr) # [1, 2, 3, 4, 5, 7, 8, 9]
 
 ![image-20200514151715276](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200514151715276.png)
 
-
-
 ### 이진 검색 (Binary Search)
 
 - 자료의 가운데에 있는 항목의 키 값과 비교하여 다음 검색의 위치를 결정하고 검색을 계속 진행하는 방법
@@ -339,9 +337,3 @@ def binarySearch(lst, low, high, key):
 - 이 게임은 숫자를 맞히는 게 아니라 피하는게 핵심! 최대한 빨리 당첨되려면 어떻게 하면 될까요?
 
 
-
-## 백트래킹
-
-### 
-
-## 트리
