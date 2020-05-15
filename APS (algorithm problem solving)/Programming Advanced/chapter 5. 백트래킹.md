@@ -192,6 +192,35 @@ backtrack([0]*N,[0]*N, 0, N)
 
 ![image-20200515124241334](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200515124241334.png)
 
+### 연습문제 1
+
+- {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}의 powerset 중 원소의 합이 10인 부분집합을 모두 출력하시오.
+
+- 코드 구현
+
+  ```python
+  def backtrack(arr, idx, N, selected, sum_num):
+      if sum_num > 10:
+          return
+      if idx == N:
+          # 총합이 10인 경우에만, 출력
+          if sum_num == 10:
+              for i in range(N):
+                  if selected[i]:
+                      print(arr[i], end=' ')
+              print()
+          return
+      
+      selected[idx] = 1
+      backtrack(arr, idx+1, N, selected, sum_num+arr[idx])
+      selected[idx] = 0   
+      backtrack(arr, idx+1, N, selected, sum_num)
+      
+      
+  arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  backtrack(arr, 0, 10, [0]*10, 0)
+  ```
+
 
 
 ## 트리
