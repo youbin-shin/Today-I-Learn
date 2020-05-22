@@ -174,3 +174,194 @@ while pq:
 print(result) # 175
 ```
 
+### KRUSKAL 알고리즘
+
+- 간선을 하나씩 선택해서 MST를 찾는 알고리즘
+
+  1. 최초, 모든 간선을 가중치에 따라 오름차순으로 정렬
+
+  2. 가중치가 가장 낮은 간선부터 선택하면서 트리를 증가시킴
+
+     - 사이클이 존재하면 다음으로 가중치가 낮은 간선 선택
+
+       사이클 존재 여부 파악 조건? 선택된 두 정점의 대표자가 같으면!
+
+  3. **n - 1** 개의 간선(정점다 연결!)이 선택될 때까지 2를 반복
+
+#### 구현한 코드
+
+```python
+def make_set(x):
+    p[x] = x
+
+def find_set(x):
+    if p[x] == x: return x
+    else:
+        p[x] = find_set(p[x])
+        return p[x]
+
+def union(x, y):
+    px = find_set(x)
+    py = find_set(y)
+    if rank[px] > rank[py]:
+        p[py] = px
+    else:
+        p[px] = py
+        if rank[px] == rank[py]:
+            rank[py] += 1
+
+
+V, E = map(int, input().split())
+edges = [list(map(int, input().split())) for i in range(E)]
+# print(edges)
+
+# 간선을 간선가중치를 기준으로 정렬
+edges.sort(key=lambda x:x[2]) # x의 두번째를 기준으로 정렬한다.
+# print(edges)
+# make_set : 모든 정점에 대해 집합 생성
+p = [0] * V
+rank = [0] * V
+for i in range(V):
+    make_set(i)
+
+cnt = 0
+result = 0
+mst = []
+# 모든 간선에 대해서 반복 -> V-1개의 간선이 선택될 때까지
+for i in range(E):
+    s, e, c = edges[i][0], edges[i][1], edges[i][2]
+    # 사이클이면 스킵 : 간선의 두 정점이 서로 같은 집합이면 => "find_set"
+    if find_set(s) == find_set(e): continue
+    # 간선 선택 => mst에 간선 정보 더하기 / 두 정점을 합친다 "union"
+    result += c
+    mst.append(edges[i])
+    union(s, e)
+
+    cnt += 1
+    if cnt == V -1 : break
+print(result) # 175
+print(mst) # [[3, 5, 18], [1, 2, 21], [2, 6, 25], [0, 2, 31], [3, 4, 34], [2, 4, 46]]
+```
+
+#### 연습문제
+
+```markdown
+입력값 (간선정보, 가중치) 랜덤하게 받음 
+0 1 2
+0 2 2
+0 5 8 
+1 2 1
+1 3 19
+2 5 5
+3 4 7
+3 5 11
+3 6 15
+4 5 9
+4 6 3
+```
+
+![image-20200522150010057](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200522150010057.png)
+
+## 최단 경로
+
+### 최단 경로란?
+
+간선의 가중치가 있는 그래프에서 두 정점 사이의 경로들 중에 간선의 가중치의 합이 최소인 경로
+
+- cf) 간선 가중치가 균일(1)할 때 `BFS` 이용
+
+#### 알고리즘
+
+- 하나의 시작 정점에서 끝정점까지의 최단 경로
+
+  "one to all" 에서 타겟으로 하는 것을 선택
+
+  - `다익스트라(dijkstra)` 알고리즘 :dart:
+
+    음의 가중치를 허용 X
+
+    - 음의 가중치는 사이클이 만들어 지면 무한대가 되기 때문!
+
+  - `벨만-포드(Bellman-ford)` 알고리즘 : 음의 가중치 허용
+
+- 모든 정점들에 대한 최단 경로
+
+  - `플로이드-워샬(Floyd-Warshall)` 알고리즘
+
+### Dijkstra 알고리즘
+
+시작 정점에서 거리가 최소인 정점을 선택해 나가면서 최단 경로를 구하는 방식
+
+- 시작정점 (s) 에서 끝 정점 (t) 까지의 최단 경로에 정점 x가 존재한다.
+
+  `s => x` , `x => t`
+
+- 이때, 최단 경로는 `s에서 x까지의 최단 경로`와 `x에서 t까지의 최단 경로`로 구성된다.
+
+- 탐욕 기법을 사용한 알고리즘으로 MST의 프림 알고리즘과 유사하다.
+
+![image-20200522152156936](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200522152156936.png)
+
+d[정점] : 시작점부터 정점까지의 거리 (현재까지 알아낸 최단)
+
+![image-20200522152345765](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200522152345765.png)
+
+#### 구현된 코드 (다익스트라 + 인접리스트)
+
+```markdown
+입력 
+6 11
+0 1 3
+0 2 5
+1 2 2
+1 3 6
+2 1 1
+2 3 4
+2 4 6
+3 4 2
+3 5 3
+4 0 3
+4 5 6
+
+출력
+[0, 3, 5, 9, 11, 12]
+```
+
+```python
+# dist, selected 배열 준비
+# 시작점 선택
+# 모든 정점이 선택될 때까지
+# 아직 선택되지 않고 dist 의 값이 최소인 정점 : u
+# 정점 u의 최단거리 결정
+# 정점 u에 인접한 정점에 대해서 간선완화
+V, E = map(int, input().split())
+adj = {i: [] for i in range(V)} # 인접리스트
+for i in range(E):
+    s, e, c = map(int, input().split())
+    adj[s].append([e, c]) # 단방향이기에
+
+INF = float('inf')
+dist = [INF] * V
+selected = [False] * V
+
+dist[0] = 0
+cnt = 0
+while cnt < V:
+    # dist 가 최소인 정점 찾기
+    min = INF
+    u = -1
+    for i in range(V):
+        if not selected[i] and dist[i] < min:
+            min = dist[i]
+            u = i
+    # 결정
+    selected[u] = True
+    cnt += 1
+    # 간선완화
+    for w, cost in adj[u]: # 도착정점 w, 가중치 cost
+        if dist[w] > dist[u] + cost:
+            dist[w] = dist[u] + cost
+
+print(dist) # [0, 3, 5, 9, 11, 12]
+```
+
