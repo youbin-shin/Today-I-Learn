@@ -74,6 +74,4 @@ def BFS(G, v):
 
 ![image-20200403103518267](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200403103518267.png)
 
-### 최단경로
-
-### 실습 1, 2
+### 
