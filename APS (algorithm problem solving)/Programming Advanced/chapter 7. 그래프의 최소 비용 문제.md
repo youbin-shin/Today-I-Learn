@@ -360,3 +360,47 @@ while cnt < V:
 print(dist) # [0, 3, 5, 9, 11, 12]
 ```
 
+---
+
+추가하기
+
+![image-20200605142738114](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200605142738114.png)
+
+![image-20200605142759427](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200605142759427.png)
+
+![image-20200605143123212](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200605143123212.png)
+
+![image-20200605143423553](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200605143423553.png)
+
+
+
+![image-20200605145945762](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200605145945762.png)
+
+- 정렬이 시간이 많이든다
+
+![image-20200605150032548](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200605150032548.png)
+
+
+
+하나로 문제
+
+![image-20200605150215328](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200605150215328.png)
+
+![image-20200605150239298](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200605150239298.png)
+
+
+
+
+
+![image-20200605150416448](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200605150416448.png)
+
+![image-20200605150531318](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200605150531318.png)
+
+![image-20200605150309778](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200605150309778.png)
+
+
+
+
+
+
+
