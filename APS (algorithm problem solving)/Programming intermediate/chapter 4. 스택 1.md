@@ -251,7 +251,123 @@ problem ) 경우에 따라 중복 호출 발생
   fibo2( 5 ) is called
   ```
 
-  
+#### 재귀함수
+
+```python
+def func(n 매개 변수) --> 매개 변수 : **문제의 크기**이자 식별
+	if 기저사례
+	else: func
+	return 해
+```
+
+일반적으로 재귀로 풀경우 언제 끝낼지에는 매개변수 기준으로 판단된다.
+
+그외의 외부의 값으로 판단할수있다면 재귀로 풀필요없다!
+
+문제의 크기를 줄여가면서 푸는 방식
+
+```python
+# 재귀 함수는 기본적으로 반복적 작업
+# for, while 을 없이 가능
+
+# for 이용시에
+for i in range(3):
+    print('Hello')
+# 재귀로 위의 코드를 작성할 시에
+def printHello(i):
+    if i == 3:
+        return
+    else:
+        print('Hello')
+        printHello(i+1)
+printHello(0)
+# 재귀 sol2
+def printHello(i):
+    if i < 3:
+        print('Hello')
+        printHello(i+1)
+printHello(0)
+
+# 재귀 원하는 횟수만큼
+def printHello(i, n):
+    if i == n:
+        return
+    else:
+        print('Hello')
+        printHello(i+1, n)
+printHello(0, 3)
+
+
+# 재귀 제대로 이해하기
+def printHello(i, n):
+    if i == n:
+        return
+    else:
+        print(i, 'Hello') # 순서대로 진행
+        printHello(i+1, n)
+        print(i, 'Hello') # 역순으로 진행
+printHello(0, 3)
+
+# 출력 0 Hello/ 1 Hello/ 2 Hello/ 2 Hello/ 1 Hello/ 0 Hello
+
+# 재귀 제대로 이해하기2
+cnt = 0
+def printHello(i, n):
+    if i == n:
+        global cnt
+        cnt += 1
+        return
+    else:
+        printHello(i+1, n)
+        printHello(i+1, n)
+printHello(0, 3)
+print('cnt=', cnt)
+# 출력 2^3 = 8(2진 트리) 이기에 cnt=8 로 출력된다.
+
+
+# 재귀 제대로 이해하기3
+cnt = 0
+def printHello(i, n): # i: 함수 호출 깊이, n: 단말노드, 마지막 단계 판단하기 위한 값
+    if i == n:
+        global cnt
+        cnt += 1
+        return
+    else:
+        printHello(i+1, n)
+        printHello(i+1, n)
+        printHello(i+1, n)
+printHello(0, 3)
+# 출력 3^3
+```
+
+```python
+# 피보나치 일반적인 재귀 함수 코드
+# 중복 호출이 많아 오래걸림
+def fibo(n):
+    if n <=2: return 1
+    return fibo(n-1) + fibo(n-2)
+print(fibo(35))
+
+# memoization 이용하여 작성한 재귀 함수 코드
+memo = [0, 1, 1] + [0] * 100
+def fibo_memo(n):
+    if n <=2: return 1
+    if memo[n]:return memo[n]
+    memo[n] = fibo_memo(n-1) + fibo_memo(n-2)
+    return memo[n]
+print(fibo_memo(35))
+
+# DP 이용
+# memoization을 재귀적 구조에 사용하는 것보다 반복적 구조로 DP를 구현한 것이 성능에 효율적
+def fibo_iter(n):
+    f = [0] * (n + 1)
+    f[1] = f[2] = 1
+    for i in range(2, n + 1): # i는 문제를 식별하는 값
+        f[i] = f[i - 1] + f[i - 2]
+    return f[n]
+```
+
+
 
 
 ### DFS (깊이 우선 탐색)
