@@ -271,6 +271,250 @@ a = [0] * 4
 backtrack(a, 0, 3)
 ```
 
+#### 백트래킹 - 미로 찾기
+
+미로 문제를 가지고 DFS, 백트래킹, 가지치기를 비교한다면, 엄격한 의미로 구분했을 때 기준입니다.
+
+미로를 정의하고 만드는 건 DFS 미로에 길이 있는 지 여부를 찾아내는 건 백트래킹, 미로에서 가장 짧은 길을 찾아내는 건 백트래킹+가지치기
+
+- 부분집합
+  - 상태공간트리 = 선택의 과정
+    - 원소의 수만큼 선택
+    - 선택지 2가지
+
+#### 부분집합 구하기
+
+```python
+# for 이용
+# k: 함수호출의 깊이, n: 호출트리의 높이, 단말 노드
+def subset(k, n): # k: 함수호출의 깊이, n: 호출트리의 높이, 단말 노드
+    if k == n:
+        pass
+    else:
+        for i in range(2):
+            bit[k] = 0
+            subset(k + 1, n)
+subset(0, 3)
+
+# 재귀 이용 -- 위의 for 이용한 코드와 같은 결과라는 것 이해하기
+def subset(k, n):
+    if k == n:
+        print(bit)
+    else:
+        bit[k] = 0
+        subset(k + 1, n)
+        bit[k] = 1
+        subset(k + 1, n)
+subset(0, 3)
+```
+
+```python
+# 부분집합 구하기
+arr = 'ABC'
+N = len(arr)
+bit = [0] * N
+
+for i in range(2):
+    bit[0] = i
+    for i in range(2):
+        bit[1] = i
+        for i in range(2):
+            bit[2] = i
+            for j in range(N):
+                if bit[j]:
+                    print(arr[j], end=' ')
+            print()
+            
+# 출력
+# 
+# C 
+# B 
+# B C 
+# A 
+# A C 
+# A B 
+# A B C 
+```
+
+##### 재귀 + 비트 표현 --> 부분집합
+
+```python
+arr = 'ABC'
+N = len(arr)
+bit = [0] * N # 선택의 과정, 선택의 정보 저장
+
+def subset(k, n):
+    # k: 노드의 높이, n: 단일 노드의 높이
+    # k: 지금까지 선택의 수, n: 해야할 선택의 수
+    if k == n:
+        pass
+    else:
+        # k번 요소를 포함하는 선택
+        bit[k] = 1
+        subset(k + 1, n)
+
+        # k번 요소를 포함하지 않는 경우
+        bit[k] = 0
+        subset(k + 1, n)
+subset(0, N)
+```
+
+##### 재귀 --> 부분집합
+
+```python
+# 부분집합의 개수 len 이용
+
+arr = 'ABC'
+N = len(arr)
+A = []
+def subset(k, n):
+    # k: 노드의 높이, n: 단일 노드의 높이
+    # k: 지금까지 선택의 수, n: 해야할 선택의 수
+    if k == n:
+        print(len(A), A)
+    else:
+        # k번 요소를 부분집합 포함
+        A.append(arr[k])
+        subset(k + 1, n)
+        A.pop()
+
+        # k번 요소를 포함하지 X
+        subset(k + 1, n)
+subset(0, N)
+
+# 3 ['A', 'B', 'C']
+# 2 ['A', 'B']
+# 2 ['A', 'C']
+# 1 ['A']
+# 2 ['B', 'C']
+# 1 ['B']
+# 1 ['C']
+# 0 []
+```
+
+```python
+# 부분집합의 개수 cnt 이용
+
+arr = 'ABC'
+N = len(arr)
+A = []
+def subset(k, n, cnt):
+    # k: 노드의 높이, n: 단일 노드의 높이
+    # k: 지금까지 선택의 수, n: 해야할 선택의 수
+    if k == n: # 종료 조건
+        print(len(A), A)
+    else:
+        A.append(arr[k]) # k번 요소를 부분집합 포함
+        subset(k + 1, n, cnt + 1)
+        A.pop()
+        
+        subset(k + 1, n, cnt)  # k번 요소를 포함하지 X
+subset(0, N, 0)
+
+# 3 ['A', 'B', 'C']
+# 2 ['A', 'B']
+# 2 ['A', 'C']
+# 1 ['A']
+# 2 ['B', 'C']
+# 1 ['B']
+# 1 ['C']
+# 0 []
+```
+
+##### 그룹 나누기
+
+```python
+arr = 'ABCD'; N = len(arr)
+
+A, B = [], []
+def subset(k, n):
+    if k == n:
+        print(A, B)
+    else:
+        # k번 요소를 부분집합 포함
+        A.append(arr[k])
+        subset(k + 1, n)
+        A.pop()
+
+        # k번 요소를 포함하지 X
+        B.append(arr[k])
+        subset(k + 1, n)
+        B.pop()
+
+subset(0, N)
+
+# 출력
+# ['A', 'B', 'C', 'D'] []
+# ['A', 'B', 'C'] ['D']
+# ['A', 'B', 'D'] ['C']
+# ['A', 'B'] ['C', 'D']
+# ['A', 'C', 'D'] ['B']
+# ['A', 'C'] ['B', 'D']
+# ['A', 'D'] ['B', 'C']
+# ['A'] ['B', 'C', 'D']
+# ['B', 'C', 'D'] ['A']
+# ['B', 'C'] ['A', 'D']
+# ['B', 'D'] ['A', 'C']
+# ['B'] ['A', 'C', 'D']
+# ['C', 'D'] ['A', 'B']
+# ['C'] ['A', 'B', 'D']
+# ['D'] ['A', 'B', 'C']
+# [] ['A', 'B', 'C', 'D']
+
+
+## 반으로 그룹 나누기
+arr = 'ABCD'; N = len(arr)
+
+A, B = [], []
+def subset(k, n, cntA):
+    if k == n:
+        if cntA == N/2:
+            print(A, B)
+    else:
+        # k번 요소를 부분집합 포함
+        A.append(arr[k])
+        subset(k + 1, n, cntA + 1)
+        A.pop()
+
+        # k번 요소를 포함하지 X
+        B.append(arr[k])
+        subset(k + 1, n, cntA)
+        B.pop()
+
+subset(0, N, 0)
+# ['A', 'B'] ['C', 'D']
+# ['A', 'C'] ['B', 'D']
+# ['A', 'D'] ['B', 'C']
+# ['B', 'C'] ['A', 'D']
+# ['B', 'D'] ['A', 'C']
+# ['C', 'D'] ['A', 'B']
+
+## 중복제거 --> 하나 미리 박아놓으면 된다.
+arr = 'ABCD'; N = len(arr)
+
+A, B = [], []
+def subset(k, n, cntA):
+    if k == n:
+        if cntA == N/2:
+            print(A, B)
+    else:
+        # k번 요소를 부분집합 포함
+        A.append(arr[k])
+        subset(k + 1, n, cntA + 1)
+        A.pop()
+
+        # k번 요소를 포함하지 X
+        B.append(arr[k])
+        subset(k + 1, n, cntA)
+        B.pop()
+A.append(arr[0])
+subset(1, N, 1)
+
+# ['A', 'B'] ['C', 'D']
+# ['A', 'C'] ['B', 'D']
+# ['A', 'D'] ['B', 'C']
+```
+
 
 
 ### 연습문제 2
@@ -279,7 +523,6 @@ backtrack(a, 0, 3)
 
 ```python
 # 부분집합 찾기
-
 def backtrack(a, k, input):
     if k == input:
         for i in range(input):
