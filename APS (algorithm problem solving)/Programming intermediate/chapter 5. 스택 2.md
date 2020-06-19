@@ -586,6 +586,89 @@ S = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 backtrack(a, 0, 10, 0)
 ```
 
+### 순열
+
+#### 1. `if문` 이용
+
+```python
+arr = 'ABC'; N = len(arr)
+for i in range(N):
+    for j in range(N):
+        if j == i: continue
+        for k in range(N):
+            if k == i or j == k: continue
+            print(arr[i], arr[j], arr[k])
+```
+
+#### 2. list 이용 
+
+```python
+arr = 'ABC'; N = len(arr)
+order = [] # 순서를 기록하는 리스트
+for i in range(N):
+    order.append(arr[i])
+    for j in range(N):
+        if arr[j] in order: continue
+        order.append(arr[j])
+        for k in range(N):
+            if arr[k] in order: continue
+            order.append(arr[k])
+            print(order)
+            order.pop()
+        order.pop()
+    order.pop()
+```
+
+#### 3. 재귀함수 이용
+
+```python
+# 1.
+arr = 'ABC'; N = len(arr)
+order = []
+def perm(k, n):
+    if k == n:
+        print(order)
+    else:
+        for i in range(N):
+            if arr[i] in order: continue
+            order.append(arr[i])
+            perm(k + 1, n)
+            order.pop()
+perm(0, N)
+
+# 2.
+arr = 'ABC'; N = len(arr)
+
+order = []
+visit = [0] * N
+def perm(k, n):
+    if k == n:
+        print(order)
+    else:
+        for i in range(N):
+            if visit[i]: continue
+            visit[i] = 1; order.append(arr[i])
+            perm(k + 1, n)
+            visit[i] = 0; order.pop()
+perm(0, N)
+
+# 3, 비트
+arr = 'ABC'; N = len(arr)
+
+order = []
+visit = [0] * N
+def perm(k, n, visit):
+    if k == n:
+        print(order)
+    else:
+        for i in range(N):
+            if visit & (1<<i): continue
+            order.append(arr[i])
+            perm(k + 1, n, visit | (1 << i))
+            order.pop()
+perm(0, N, 0)
+```
+
 
 
 ## 분할정복 ★
