@@ -112,6 +112,38 @@ def backtrack(선택 집합, 선택한수, 모든 선택수):
   - 하향 대각 : i - j의 차가 일정
     - 번째 대각선 : N - (i - j) - 1= N + j - i - 1 
 
+#### cf) N queen SW 2806번 
+
+```python
+# 행은 고정하고 열의 위치만 설정하면 된다.
+# 1. 열체크, 2. 대각 체크(행값의 차이 == 열값이 절대값 차이 이면 대각)
+def possible(k, c): # k번 퀸의 위치 (k, c)
+    for i in range(k):
+        if k - i == abs(c - col[i]): return False
+    return True
+
+def nQueen(k):
+    if k == N:
+        pass
+    else:
+        for i in range(N):
+            if visit[i]: continue
+            # 퀸들이 서로 대각에 위치하는 지 판단 -- 가지치기
+            # k 번째 퀸의 열값을 i 로 결정
+            # 그 이전에 결정한 상태는 0 ~ k-1 번까지
+            if not possible(k, i): continue
+            visit[i] = 1
+            col[k] = i
+            nQueen(k + 1)
+            visit[i] = 0
+
+for t in range(int(input())):
+    N = int(input())
+    col = [0] * N
+    visit = [0] * N
+    nQueen(N)
+```
+
 ### powerset 구하는 백트래킹 알고리즘
 
 ![image-20200515105016570](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200515105016570.png)
