@@ -512,15 +512,29 @@ DSF(v)
 end DFS()                    
 ```
 
+### DFS 연습문제
 
+![DFS 연습문제 그림](https://user-images.githubusercontent.com/60081201/76927630-d5809600-6922-11ea-8011-8b2094b371df.JPG)
+
+#### 입력값
 
 ```python
-import sys
+#input.txt
+7 8
+1 2
+1 3
+2 4
+2 5
+4 6
+5 6
+6 7
+3 7
+```
 
-sys.stdin = open("input.txt","r")
+#### sol 1. 인접 행렬
 
+```python
 # 인덱스 0부터이기에 입력에 -1로 계산하여 푼 코드 
-# 인접 행렬
 
 vertex, line = map(int, input().split())
 
@@ -549,21 +563,6 @@ while (len(stack) > 0):
 print()
 for i in range(vertex):
     print(graph[i])
-
-
-```
-
-```python
-#input.txt
-7 8
-1 2
-1 3
-2 4
-2 5
-4 6
-5 6
-6 7
-3 7
 ```
 
 ```python
@@ -578,8 +577,9 @@ for i in range(vertex):
 [0, 0, 1, 0, 0, 1, 0]
 ```
 
+#### sol 2. 0을 추가하여 인덱스 그대로 받는 코드
+
 ```python
-# sol 2 0을 추가하여 인덱스 그대로 받는 코드
 # 입력, 출력 위와 동일
 
 vertex, line = map(int, input().split())
@@ -611,9 +611,9 @@ for i in range(vertex):
     print(graph[i])
 ```
 
-```python
-# 재귀함수를 이용한 recursive DFS
+#### sol 3. 재귀함수를 이용한 recursive DFS
 
+```python
 def DFSr(v):
     print(v, end=' ')
     visited[v] = True
@@ -635,6 +635,64 @@ for i in range(0, len(edges), 2):
     G[edges[i + 1]][edges[i]] = 1
 
 DFSr(1) # 출력 1 2 4 6 5 7 3
+```
+
+#### sol 4. 인접 리스트
+
+- 준비
+
+```python
+# 인접 리스트 이용
+V, E = map(int, input().split())
+G = [[] for _ in range(V + 1)] # 0 인덱스 비워둠, 1 ~ V 사용하기에
+for _ in range(E):
+    u, v = map(int, input().split())
+    # 무향 그래프
+    G[u].append(v)
+    G[v].append(u)
+
+for i in range(1, V + 1):
+    print(i, G[i])
+# 출력값
+# 1 [2, 3]
+# 2 [1, 4, 5]
+# 3 [1, 7]
+# 4 [2, 6]
+# 5 [2, 6]
+# 6 [4, 5, 7]
+# 7 [6, 3]
+```
+
+- 최종 코드
+
+```python
+V, E = map(int, input().split())
+G = [[] for _ in range(V + 1)] # 0 인덱스 비워둠, 1 ~ V 사용하기에
+for _ in range(E):
+    u, v = map(int, input().split())
+    # 무향 그래프
+    G[u].append(v)
+    G[v].append(u)
+
+visit = [0] * (V + 1)
+S = []
+v = 1
+S.append(v);print(v, end=' ')
+visit[v] = 1
+# 빈 스택이 아닐 동안
+while S:
+    # v의 방문하지 않은 인접 정점을 찾는다.
+    for w in G[v]:
+        if visit[w]: continue
+        # v --> w
+        S.append(v)
+        visit[w] = 1
+        print(w, end=' ')
+        v = w
+        break
+    else:
+        # 그 이전에 방문한 정점으로 돌아가야 한다.
+        v = S.pop()
 ```
 
 
