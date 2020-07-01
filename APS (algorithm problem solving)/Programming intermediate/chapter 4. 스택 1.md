@@ -695,31 +695,50 @@ while S:
         v = S.pop()
 ```
 
+#### sol 5. 재귀 호출로 구현 (stack X)
 
+```python
+V, E = map(int, input().split())
+G = [[] for _ in range(V + 1)] # 0 인덱스 비워둠, 1 ~ V 사용하기에
+for _ in range(E):
+    u, v = map(int, input().split())
+    # 무향 그래프
+    G[u].append(v)
+    G[v].append(u)
 
+visit = [0] * (V + 1)
 
+def DFS(v): # v: 현재 방문하는 정점
+    visit[v] = 1 # 출력
+    for w in G[v]:
+        if not visit[w]: DFS(w)
+            
+## 깊이 우선 트리(결과/출력)
+```
 
+#### sol 5. 재귀 호출로 구현 (stack O)
 
+```python
+def DFS(v):
+    S = []
+    visit = [False] * (V + 1)
+    S.append(v)
+    visit[v] = True
+    # 빈 스택이 아닐 동안
+    while S:
+        # v의 방문하지 않은 인접 정점을 찾는다.
+        for w in G[v]:
+            if not visit[w]:
+                # v --> w
+                visit[w] = True
+                S.append(v)
+                v = w
+                break
+        else:
+            # 그 이전에 방문한 정점으로 돌아가야 한다.
+            v = S.pop()
+```
 
+깊이 우선 탐색일 경우는 최단으로 출발점에서 도착점까지 갔다는 보장 X
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+최단 경로 구하기 => 깊이 우선 탐색으로 X
