@@ -49,13 +49,9 @@
 
 #### git에 사용자 정보 입력하기
 
-1. git config --global user. name (사용자 이름)
+1. git config --global user. name {사용자 이름}
 
-   youbin-shin
-
-2. git config --global user.email (사용자 이메일)
-
-   youbin5575@gmail.com
+2. git config --global user.email {사용자 이메일}
 
 3. git config --global --list
 
@@ -105,48 +101,7 @@
 
 - git re~
 
-#### gitignore
-
-- project 에서 `git init` 한 후에 `touch.gitignore` 명령어로 만들면 된다.
-
-- https://www.gitignore.io/
-
-  - 위의 사이트에서 프로그램/언어(ex. django)를 입력하여 검색하면 찾을 수 있다.
-
-    ![gitignore](https://user-images.githubusercontent.com/60081201/78453288-a5c7e100-76cb-11ea-8c90-f3aabe84b2c5.JPG)
-
-- https://github.com/github/gitignore
-
-  - 언어는 gitignore에서 퀼리티가 낮아서 `github.gitignore` 에서 추가하는 것이 좋다.
-
-### GitHub
-
-GitHub (https://github.com/)
-
-이름: youbin-shin
-
-이메일: youbin5575@gmail.com
-
-
-#### github에 이미지 올리는 방법
-
-issues에 들어가서 write에 그림을 갖고 드래그하면 인터넷 주소가 된다.
-
-이 주소를 md에 넣으면 된다. 
-
-#### octotree
-
-chrome 확장 프로그램 추가시 github 목록 보기 편하다.
-
-****
-
-*TIL ( today i learn ) 수업 외적인 공부 (public)* 
-
-*lectures - 수업 내용 정리(private)*
-
-- startcamp
-
-- git 순서 (중간중간 git status 하기)
+#### git 순서 정리 (중간중간 git status 하기)
 
 1. git init
 
@@ -176,63 +131,39 @@ chrome 확장 프로그램 추가시 github 목록 보기 편하다.
   - pull : 명령어 git pull
     - clone과 pull의 차이 : 처음 설치할 때만 clone 이후에는 업데이트와 같은 기능이 pull이다!!!
 
+#### gitignore
+
+- project 에서 `git init` 한 후에 `touch.gitignore` 명령어로 만들면 된다.
+
+- https://www.gitignore.io/
+
+  - 위의 사이트에서 프로그램/언어(ex. django)를 입력하여 검색하면 찾을 수 있다.
+
+    ![gitignore](https://user-images.githubusercontent.com/60081201/78453288-a5c7e100-76cb-11ea-8c90-f3aabe84b2c5.JPG)
+
+- https://github.com/github/gitignore
+
+  - 언어는 gitignore에서 퀼리티가 낮아서 `github.gitignore` 에서 추가하는 것이 좋다.
+
+### GitHub
+
+
+#### github에 이미지 올리는 방법
+
+issues에 들어가서 write에 그림을 갖고 드래그하면 인터넷 주소가 된다.
+
+이 주소를 md에 넣으면 된다. 
+
+#### octotree
+
+chrome 확장 프로그램 추가시 github 목록 보기 편하다.
+
 ---
 
 ### slack
 
+- 개발자들의 카카오톡
+
 - 다운로드 : slack 사이트 밑부분에 다운 64bit로
 
----
 
-### jupyter notebook
-
-git bash에 들어가서 `pip install notebook` 입력하여 설치하기
-
-`jupyter notebook`을 입력하면 볼 수 있음
-
-
-
-`h`를 누르면 명령어 확인 가능 
-
-1. edit mode (초록)
-
-   - ctrl + enter : 실행
-
-   - shinft + enter : 셀이 없다면 만들고 있다면 이동
-
-   - alt +enter : 셀 무조건 추가
-
-   - esc를 누르면 command mode로
-
-   - 모든 셀은 다 관여된다.
-
-   - 별표가 되면 멈춘 것이기에 무한루프.. 
-
-     해결방법 : kernel > restart&clear output 하면 된다.
-
-2. command mode (파랑) 
-
-   - d를 더블클릭하면 없어진다.
-   - enter을 누르면 edit mode로
-   - m을 누르면 markdown
-   - a, b로 셀추가 a는 셀이 밑으로 b는 셀이 위로 생성
-
-
-
-#### jupyter notebook extension 설치하는 방법
-
-**(번호 매겨주는 방법, 보기편한 방법)**
-
-git rush에 
-
-1. ```
-   pip install jupyter_contrib_nbextensions
-   ```
-
-2. ```
-   jupyter contrib nbextension install --user
-   ```
-
- 두개 설치하면 된다. 
-
-이후 `jupyter notebook`을 하여 켜준다. 이후 Nbextensions에서 content를 찾아서 disable 앞에 체크박스를 지워주고 table of contents 체크를 해준뒤 다시 disable 앞에 체크박스로 잠궈주면 된다. 

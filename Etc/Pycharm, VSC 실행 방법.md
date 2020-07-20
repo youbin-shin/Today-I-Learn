@@ -18,15 +18,14 @@ shift + alt + F10 >> 실행할 파일 설정 >> shift + F10
 
 ### Visual Studio Code
 
-#### vsc terminal 실행
+#### vsc terminal에서 파이썬 파일 실행하는 방법
 
-view > terimal 하여 터미널을 키고
+1. view > terimal 하여 터미널을 킨다.
+2. 터미널에 `python + 파일명` 입력 후 엔터를 친다.
 
-터미널에 python + 파일명 + 엔터
+#### vsc terminal 수정 방법
 
-#### vsc terminal 수정
-
-cmd -> bash 바꾸고 싶을 때
+cmd => bash 바꾸고 싶을 때
 
 crtl+shif+p > default  입력 >  command  > git bash 로 클릭
 
