@@ -364,7 +364,25 @@ print(dist) # [0, 3, 5, 9, 11, 12]
 
 추가하기
 
+## 최소 신장 트리(MST)
+
+> 송유관, 네트워크
+
+- Prim
+
+  - 시간 복잡도 : O(n^2)
+
+- Kruskal
+
+  - 시간 복잡도 : O(mlogm) 
+
+    이때 m은 간선의 개수
+
 ![image-20200605142738114](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200605142738114.png)
+
+### Prim 알고리즘
+
+
 
 ![image-20200605142759427](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20200605142759427.png)
 
