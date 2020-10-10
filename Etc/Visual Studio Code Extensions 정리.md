@@ -28,8 +28,16 @@ Material Design icons 들을 통해 파일에 대한 시각적인 구분을 높�
 
 자동으로 새로고침해준다.
 
+#### HTML Snippets
 
+괄호없는 태그이름을 입력하고 tab을 할 경우 태그가 형성된다.
 
 ### Vue에서 유용한 extensions
 
 #### vue2snippets
+
+저장시 자동으로 컨벤션을 지켜준다.
+
+#### Bracket Pair Colorizer 2
+
+괄호 매칭을 색을 통해 구분을 잘할 수 있도록 되도록 만들어준다.
