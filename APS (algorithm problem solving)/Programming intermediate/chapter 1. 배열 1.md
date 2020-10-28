@@ -246,20 +246,18 @@ for t in range(int(input())):
             C[A[i]] -= 1
             
          return B
-    ```
+    
 
-    ```python
     a = [0, 4, 1, 3, 1, 2, 4, 1]
     b = [0] * len(a)
-    # k = max(a) + 1
+    k = max(a) + 1
     
-    print(Counting_Sort(a, b, 5))
+    print(Counting_Sort(a, b, 5)) # [0, 1, 1, 1, 2, 3, 4, 4]
     ```
     
-```python
-    [0, 1, 1, 1, 2, 3, 4, 4]
-    ```
-    
+
+
+
 - 선택 정렬
   
 - 퀵 정렬
