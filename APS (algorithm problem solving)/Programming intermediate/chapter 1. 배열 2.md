@@ -37,7 +37,7 @@ dy = [0, +1, 0, -1]
 for i in range( ):
     for j in range( ):
         if i < j:
-        arr[i][j]. arr[j][i] = arr[j][i], arr[i][j]
+        	arr[i][j], arr[j][i] = arr[j][i], arr[i][j]
 ```
 
 #### 연습문제 - dx, dy ★
@@ -69,10 +69,13 @@ def isWall(x,y):
     if x<0 or x>=5: return True
     if y<0 or y>=5: return True
     return False
+
+
 def calAbs(y,x):
     if y-x > 0: return y-x
     else: return x-y
 
+    
 arr = [[0 for x in range(5)] for x in range(5)]
 for i in range(5):
     arr[i] = list(map(int, input().split()))
@@ -162,7 +165,7 @@ j = 0 , **1**, *2*
 
 ​					*= 101 & 100 = 1*
 
---> 해당되는 위치의 값이 결과적으로 나온다.
+=> 해당되는 위치의 값이 결과적으로 나온다.
 
 ```python
 # 부분집합 구하기 ★
@@ -183,7 +186,7 @@ for i in range(1<<n): # 1<<n = 8
 # 10개의 정수를 입력받아 부분집합의 합이 0이 되는 것이 존재하는지 계산하는 함수 구하기
 
 arr = [-3, 3, -9, 6, 7, -6, 1, 5, 4, -2]
-#arr = list(map(int, input().split()))
+# arr = list(map(int, input().split()))
 sum = 0
 cnt = 0
 
