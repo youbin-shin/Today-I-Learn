@@ -1,4 +1,26 @@
-# Visual Studio Code Extensions 정리
+# Visual Studio Code 이용하며 알아두면 좋은 팁
+
+## Visual Studio Code 코드 실행 방법 정리
+
+### python
+
+```bash
+# 실행시킬 파일(ex 파일명 test.py) 위치에서
+$ python test.py
+```
+
+
+
+### javascript
+
+```bash
+# 실행시킬 파일(ex 파일명 test.js) 위치에서
+$ node test.js
+```
+
+
+
+## Visual Studio Code Extensions 정리
 
 > Visual Studio Code 에서 유용한 extensions와 기능을 정리한다.
 
