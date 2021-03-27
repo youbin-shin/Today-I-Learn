@@ -63,7 +63,7 @@
 - 시작한 정점에서 끝나는 경로를 `사이클(Cycle)`이라 한다.
   - 1 - 3 - 5 - 1
 
-#### 그래프 표현 :star:
+### 그래프 표현 :star:
 
 간선의 정보를 저장하는 방식, 메모리나 성능을 고려해서 결정
 
@@ -374,6 +374,8 @@ bfs(1) # 1번 정점부터 bfs 시작
 # 출력 : 1 3 7 6 5 4 2 
 ```
 
+---
+
 ## 서로소 집합들 (Disjoint-Sets)
 
 **서로소** 또는 **상호배타 집합**들은 서로 중복 포함된 원소가 없는 집합들 (교집합 X)
@@ -447,12 +449,12 @@ print(find_set(6)) # 5
 ```python
 def make_set(x):
     p[x] = x
-
-
+    # rank[x] = 0
+    
 def find_set(x):
     if p[x] == x: return x
     else:
-        p[x] = find_set(p[x])
+        p[x] = find_set(p[x]) # 대표자 값으로 갱신
         return p[x]
 
 
@@ -483,6 +485,10 @@ print(p) # [0, 3, 3, 6, 4, 6, 6, 6, 6]
 print(find_set(4)) # 4
 print(find_set(5)) # 6
 ```
+
+![image-20210117225946938](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20210117225946938.png)
+
+![image-20210117230002021](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20210117230002021.png)
 
 ##### Path compression
 

@@ -34,6 +34,8 @@
 - 부모 자식관계와 가중치에 대한 배열
   
   - 트리
+  
+  ![image-20210117230902268](C:\Users\youbi\AppData\Roaming\Typora\typora-user-images\image-20210117230902268.png)
 
 ### Prim 알고리즘
 
