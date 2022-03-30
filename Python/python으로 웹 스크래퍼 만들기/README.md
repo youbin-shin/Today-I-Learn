@@ -53,6 +53,15 @@ python 언어는 아래 목록 모두 구현가능하다.
 
     - requests 모듈은 파이썬에서 요청을 만드는 기능이 모여있음
     - https://pypi.org/project/requests2/
+    - install
+      - window
+        ```bash
+        python -m pip install requests
+        ```
+      - mac
+        ```bash
+        pip install requests
+        ```
 
   - beautiful Soup
 
@@ -65,6 +74,15 @@ python 언어는 아래 목록 모두 구현가능하다.
 
     - 편리한 라이브러리로 html 정보를 추출하기 유용한 package -> 데이터 추출!
     - https://www.crummy.com/software/BeautifulSoup/bs4/doc/
+    - install
+      - window
+        ```bash
+        pip install beautifulsoup4
+        ```
+      - mac
+        ```bash
+        pip install beautifulsoup4
+        ```
 
 - Web scraping procedure
 
@@ -90,40 +108,12 @@ python 언어는 아래 목록 모두 구현가능하다.
       ```html
       <li><a href="/jobs?q=python&amp;limit=50&amp;start=50" aria-label="2" data-pp="gQAyAAABf9DVb-wAAAABzd2DswBoAQIBBxAHA0Sb7C3H5lrLs1hpTcTj5mioNdJ3l7CN_VDNIB1oFzChb7P5_TCp8_3dYwXUnYqTyTBbV4w3x19DrKyMa4nPOj43M7fYaqHi0smRMHPxyKqdnoH092silP-c5bEqRgrBOXwAAA" onmousedown="addPPUrlParam &amp;&amp; addPPUrlParam(this);" rel="nofollow"><span class="pn">2</span></a></li>
       ```
-  7.  
+  6. 요청시 가져올 데이터를 beautifulSoup을 이용하여 필요한 데이터만 저장하기
     
 
 ### 실습 코드
-#### indeed.py
-- `extract_indeed_pages`: indeed 사이트에서 마지막 페이지를 가져오는 함수
-- `extract_indeed_jobs`: 페이지별로 사이트에서 추출할 jobs에 대한 정보를 담아 리턴하는 함수
-```python
-import requests
-from bs4 import BeautifulSoup
-
-LIMIT = 50
-URL = f"https://kr.indeed.com/jobs?q=python&limit={LIMIT}"
-
-def extract_indeed_pages():
-  result = requests.get(URL)
-  soup = BeautifulSoup(result.text, 'html.parser')
-  pagination = soup.find('div', {'class': 'pagination'})
-  links = pagination.find_all('a')
-
-  pages = []
-  for link in links[:-1]:
-    pages.append(int(link.string)) # == pages.append(int(link.string))
-
-  last_page = pages[-1]
-  return last_page
-
-
-def extract_indeed_jobs(last_page):
-  jobs = []
-  for page in range(last_page):
-    result = requests.get(f"{URL}&start={page*LIMIT}")
-    print(result.status_code)
-    # jobs에 필요한 데이터 추가 로직
-  return jobs
-
-```
+- 실행 방법
+  ```bash
+  $ cd /recruitment_website_scrap_project
+  $ python main.py
+  ```
