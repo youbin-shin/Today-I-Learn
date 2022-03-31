@@ -26,9 +26,11 @@ def extract_indeed_jobs(last_page):
     result = requests.get(f"{URL}&start={page*LIMIT}")
     # jobs에 필요한 데이터 추가 로직
     soup = BeautifulSoup(result.text, 'html.parser')
-    results = soup.find_all('div', {'class': 'job_seen_beacon'})
+    results = soup.find_all('div', {'class': 'job_seen_beacon'}) # find_all: 리스트 전부 가져옴
     for result in results:
       # 가져올 정보 위치의 규칙을 찾아 가져오기
-      title = result.find('span', {'title': True}).string
+      title = result.find('span', {'title': True}).string # find: 첫번째 찾은 결과만 가져옴
+      company = result.find('span', {'class': 'companyName'}).string 
+      print(title,company)
       jobs.append(title)
   return jobs
