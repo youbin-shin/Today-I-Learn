@@ -84,7 +84,7 @@ python 언어는 아래 목록 모두 구현가능하다.
         pip install beautifulsoup4
         ```
 
-- Web scraping procedure
+### Web scraping procedure
 
   1. scrap할 사이트의 url 접근하기
 
@@ -111,8 +111,8 @@ python 언어는 아래 목록 모두 구현가능하다.
   6. 요청시 가져올 데이터를 beautifulSoup을 이용하여 필요한 데이터만 저장하기
     
 
-### 실습 코드
-- 실행 방법
+## 실습 코드
+### 실행 방법
   ```bash
   $ cd /recruitment_website_scrap_project
   $ python main.py
