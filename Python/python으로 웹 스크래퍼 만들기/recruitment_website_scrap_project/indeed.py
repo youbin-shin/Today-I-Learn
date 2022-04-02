@@ -19,6 +19,18 @@ def extract_indeed_pages():
   return last_page
 
 
+def extract_job(html):
+  # 가져올 정보 위치의 규칙을 찾아 가져오기
+  title = html.find('span', {'title': True}).string
+  company = html.find('span', {'class': 'companyName'}).string 
+  location = html.find('div', {'class': 'companyLocation'}).get_text()
+  return {
+    'title': title, 
+    'company': company, 
+    'location': location
+  }
+
+
 def extract_indeed_jobs(last_page):
   # 페이지별로 사이트에서 추출할 jobs에 대한 정보를 담아 리턴하는 함수
   jobs = []
@@ -26,11 +38,8 @@ def extract_indeed_jobs(last_page):
     result = requests.get(f"{URL}&start={page*LIMIT}")
     # jobs에 필요한 데이터 추가 로직
     soup = BeautifulSoup(result.text, 'html.parser')
-    results = soup.find_all('div', {'class': 'job_seen_beacon'}) # find_all: 리스트 전부 가져옴
+    results = soup.find_all('div', {'class': 'job_seen_beacon'}) 
     for result in results:
-      # 가져올 정보 위치의 규칙을 찾아 가져오기
-      title = result.find('span', {'title': True}).string # find: 첫번째 찾은 결과만 가져옴
-      company = result.find('span', {'class': 'companyName'}).string 
-      print(title,company)
-      jobs.append(title)
+      job = extract_job(result)
+      jobs.append(job)
   return jobs

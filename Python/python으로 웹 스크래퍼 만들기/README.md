@@ -117,3 +117,12 @@ python 언어는 아래 목록 모두 구현가능하다.
   $ cd /recruitment_website_scrap_project
   $ python main.py
   ```
+
+### BeautifulSoup 이용한 개념 정리
+- find() vs find_all()
+  아래 함수들을 통해 원하는 태그 정보를 가져온다.
+  - find(): 첫번째 찾은 결과만 가져옴
+  - find_all(): 리스트 전부 가져옴
+- string vs get_text
+  태그 내 문장을 가져옴
+  - string는 문자열이 없거나 문자열이 많은 경우 None을 출력하지만 get_text()는 태그 내 문자들을 모두 가져옴
