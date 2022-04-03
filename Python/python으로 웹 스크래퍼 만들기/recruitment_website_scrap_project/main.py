@@ -1,5 +1,6 @@
-from indeed import extract_indeed_pages, extract_indeed_jobs
+from indeed import get_jobs as get_indeed_jobs
+from incruit import get_jobs as get_incruit_jobs
 
-
-last_page = extract_indeed_pages()
-res = extract_indeed_jobs(last_page)
+# indeed_jobs = get_indeed_jobs()
+incruit_jobs = get_incruit_jobs()
+print(incruit_jobs)

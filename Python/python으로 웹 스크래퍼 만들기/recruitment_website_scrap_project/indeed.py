@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 LIMIT = 50
 URL = f"https://kr.indeed.com/jobs?q=python&limit={LIMIT}"
 
-def extract_indeed_pages():
+def get_last_page():
   # indeed 사이트에서 마지막 페이지를 가져오는 함수
   result = requests.get(URL)
   soup = BeautifulSoup(result.text, 'html.parser')
@@ -18,7 +18,6 @@ def extract_indeed_pages():
   last_page = pages[-1]
   return last_page
 
-
 def extract_job(html):
   # 가져올 정보 위치의 규칙을 찾아 가져오기
   title = html.find('span', {'title': True}).string
@@ -30,8 +29,7 @@ def extract_job(html):
     'location': location
   }
 
-
-def extract_indeed_jobs(last_page):
+def extract_jobs(last_page):
   # 페이지별로 사이트에서 추출할 jobs에 대한 정보를 담아 리턴하는 함수
   jobs = []
   for page in range(last_page):
@@ -42,4 +40,10 @@ def extract_indeed_jobs(last_page):
     for result in results:
       job = extract_job(result)
       jobs.append(job)
+  return jobs
+
+def get_jobs():
+  # indeed 취업 사이트에서 python 직무 채용 목록 스크랩트하는 함수
+  last_page = get_last_page()
+  jobs = extract_jobs(last_page)
   return jobs
