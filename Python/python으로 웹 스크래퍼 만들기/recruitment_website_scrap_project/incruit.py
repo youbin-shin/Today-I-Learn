@@ -2,16 +2,38 @@ import requests
 from bs4 import BeautifulSoup
 
 LIMIT = 10
-URL = f"https://job.incruit.com/jobdb_list/searchjob.asp?occ3=16930&today=y&articlecount={LIMIT}"
+URL = f"https://job.incruit.com/jobdb_list/searchjob.asp?occ3=16930&articlecount={LIMIT}"
 
 
 def get_last_page():
   result = requests.get(URL)
   soup = BeautifulSoup(result.text, 'html.parser')
   pages = soup.find('p', {'class': 'sqr_paging'}).find_all('a')
-  print(pages)
-  return
 
+  last_page = 1
+  for page in pages:
+    page = page.string
+    try:
+      page = int(page)
+      if last_page < page:
+        last_page = page
+    except ValueError:
+      pass
+  return last_page
+
+def extract_jobs(last_page):
+  jobs = []
+  for page in range(1, last_page + 1):
+    result = requests.get(f'{URL}&page={page}')
+    soup = BeautifulSoup(result.text, 'html.parser')
+    results = soup.find_all('span', {'class': 'accent'})
+    for result in results:
+      title = result.find('a').get_text()
+      print(title)
+
+  return jobs
 
 def get_jobs():
   last_page = get_last_page()
+  jobs = extract_jobs(last_page)
+  return jobs
