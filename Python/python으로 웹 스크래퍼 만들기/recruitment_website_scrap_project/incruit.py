@@ -21,15 +21,26 @@ def get_last_page():
       pass
   return last_page
 
+def extract_job(html):
+  title = html.find('span', {'class': 'accent'}).find('a', {'class': 'links'})['title']
+  company = html.find('span', {'class': 'links'}).find('a', {'class': 'strong'}).string
+  print(company)
+  
+  return {
+    'title': title
+  }
+
+
 def extract_jobs(last_page):
   jobs = []
   for page in range(1, last_page + 1):
     result = requests.get(f'{URL}&page={page}')
     soup = BeautifulSoup(result.text, 'html.parser')
-    results = soup.find_all('span', {'class': 'accent'})
+    results = soup.find_all('tr')
     for result in results:
-      title = result.find('a').get_text()
-      print(title)
+      job = extract_job(result)
+      # print(job)
+      jobs.append(job)
 
   return jobs
 
