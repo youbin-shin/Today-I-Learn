@@ -150,6 +150,14 @@ python 언어는 아래 목록 모두 구현가능하다.
 
 - string vs get_text
   태그 내 문장을 가져옴
-  - string는 문자열이 없거나 문자열이 많은 경우 None을 출력하지만 get_text()는 태그 내 문자들을 모두 가져옴
+  - string는 문자열이 없거나 문자열이 많은 경우 None 출력
 
+  - get_text()는 태그 내 문자들을 모두 가져옴
+  
+    - .get_text(strip=True) : strip기능을 이용하여 원하는 문자열을 제거하여 가져올 수 있음
+  
+      - ```python
+        # ex) 엔터 삭제
+        .get_text(strip=True).strip('\t').strop('\n') 
+        ```
   

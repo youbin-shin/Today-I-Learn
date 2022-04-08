@@ -1,3 +1,4 @@
+from re import T
 import requests
 from bs4 import BeautifulSoup
 
@@ -24,11 +25,13 @@ def get_last_page():
 def extract_job(html):
   title = html.find('span', {'class': 'accent'}).find('a', {'class': 'links'})['title']
   company = html.find('div', {'class': 'check_list_r'}).find('span', {'class': 'links'}).find('a', {'class': 'strong'})['title']
-  location = html.find_all('p', {'class': 'details_txts firstChild'})[-1].find('em').get_text()
+  location = html.find_all('p', {'class': 'details_txts firstChild'})[-1].find('em').get_text(strip=True).strip('\t')
+  apply_link =  html.find('span', {'class': 'accent'}).find('a', {'class': 'links'})['href']
   return {
     'title': title,
     'company': company,
-    'location': location
+    'location': location,
+    'apply_link': apply_link
   }
 
 def extract_jobs(last_page):
@@ -39,7 +42,6 @@ def extract_jobs(last_page):
     results = soup.find('tbody').find_all('tr')
     for result in results:
       job = extract_job(result)
-      print(job)
       jobs.append(job)
 
   return jobs
