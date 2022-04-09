@@ -1,4 +1,3 @@
-from re import T
 import requests
 from bs4 import BeautifulSoup
 
@@ -9,17 +8,16 @@ URL = f"https://job.incruit.com/jobdb_list/searchjob.asp?occ3=16930&articlecount
 def get_last_page():
   result = requests.get(URL)
   soup = BeautifulSoup(result.text, 'html.parser')
-  pages = soup.find('p', {'class': 'sqr_paging'}).find_all('a')
-
-  last_page = 1
-  for page in pages:
-    page = page.string
-    try:
-      page = int(page)
-      if last_page < page:
-        last_page = page
-    except ValueError:
-      pass
+  try:
+    # 마지막 페이지로 한번에 이동하는 버튼이 있는 경우 (">>")
+    page_info = soup.find('a', {'class': 'f_next_n'})['href']
+    last_page = int(page_info.split('&page=')[1])
+  except TypeError:
+    # 다음 페이지로 넘어가는 버튼 끝만 있는 경우 (">")
+    page_info = soup.find('a', {'class': 'next_n'})['href']
+    last_page = int(page_info.split('page=')[1])
+  except:
+    last_page = 1
   return last_page
 
 def extract_job(html):
@@ -43,7 +41,7 @@ def extract_jobs(last_page):
     for result in results:
       job = extract_job(result)
       jobs.append(job)
-
+      print(job)
   return jobs
 
 def get_jobs():
