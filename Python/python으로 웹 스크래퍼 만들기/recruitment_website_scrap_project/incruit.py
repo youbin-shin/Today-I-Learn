@@ -35,6 +35,7 @@ def extract_job(html):
 def extract_jobs(last_page):
   jobs = []
   for page in range(1, last_page + 1):
+    print(f"Scrapping Incruit Pages: {page}")
     result = requests.get(f'{URL}&page={page}')
     soup = BeautifulSoup(result.text, 'html.parser')
     results = soup.find('tbody').find_all('tr')
