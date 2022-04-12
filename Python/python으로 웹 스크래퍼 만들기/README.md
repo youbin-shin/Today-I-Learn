@@ -112,7 +112,57 @@ python 언어는 아래 목록 모두 구현가능하다.
   6. 요청시 가져올 데이터를 beautifulSoup을 이용하여 필요한 데이터만 저장하기
 
 
+
+### CSV
+
+What is CSV?
+- Comma Separated Values
+
+
+
+## 3. Get ready for Django
+
+[django]: https://www.djangoproject.com/
+
+### 알아야 할 개념
+
+- arguments 와 keyword arguments 란?
+
+  - ```python
+    # ex 1
+    def plus(a, b, *args, **kwargs):
+        print(args) # 출력: (1, 1, 1, 3, 3, 3, 3, 3)
+        print(kwargs) # 출력: {'this': 'is', 'kwargs': 'args'}
+        return a + b
+    
+    plus(1, 2, 1, 1, 1, 3, 3, 3, 3, 3, 'this': 'is', 'kwargs': 'args')
+    ```
+
+    - `*args`: tuple 형태로 positional argument가 많이 있을 것이라는 의미(제한 x)
+    - `**kwargs`: dictionary 형태로 keyword argument가 많이 있을 것이라는 의미(제한 x)
+
+  - ```python
+    # ex 2) 계산기 로직
+    def plus(*args):
+        result = 0
+        for number in args:
+            result += number
+        return result
+    
+    plus(1, 2, 3, 4, 3, 2, 1, 2, 5, 4, 3, 2)
+    
+    ```
+
+    
+
+- 객체 프로그래밍
+
+  - Class, Inheritance(상속), method
+
+
+
 ## 실습 코드
+
 ### 실행 방법
   ```bash
   $ cd /recruitment_website_scrap_project
@@ -160,4 +210,3 @@ python 언어는 아래 목록 모두 구현가능하다.
         # ex) 엔터 삭제
         .get_text(strip=True).strip('\t').strop('\n') 
         ```
-  
