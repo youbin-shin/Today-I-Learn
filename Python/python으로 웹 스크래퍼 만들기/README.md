@@ -157,7 +157,29 @@ What is CSV?
 
 - 객체 프로그래밍
 
-  - Class, Inheritance(상속), method
+  - 기억할 개념: Class, Inheritance(상속), method
+  
+  - Class는 설계도 같은 것
+  
+  - ```python
+    class Car(): # -> class 기본 형태 
+        # properties
+        wheels = 4 
+        doors = 4
+        windows = 4
+        seats = 4
+        
+    porche = Car() # 클래스를 통해 인스턴스 생성
+    print(porche.windows) # 4
+    
+    porch.color = "Red"
+    print(porche.color) # Red
+    
+    ferrari = Car()
+    ferrari.color = "Yellow"
+    ```
+  
+    
 
 
 
@@ -206,7 +228,7 @@ What is CSV?
   
     - .get_text(strip=True) : strip기능을 이용하여 원하는 문자열을 제거하여 가져올 수 있음
   
-      - ```python
+      - ``` python
         # ex) 엔터 삭제
         .get_text(strip=True).strip('\t').strop('\n') 
         ```
