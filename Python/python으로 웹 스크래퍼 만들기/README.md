@@ -159,25 +159,75 @@ What is CSV?
 
   - 기억할 개념: Class, Inheritance(상속), method
   
-  - Class는 설계도 같은 것
-  
-  - ```python
+  - Class: 설계도 같은 것
+    ```python
     class Car(): # -> class 기본 형태 
         # properties
         wheels = 4 
         doors = 4
         windows = 4
         seats = 4
-        
+
     porche = Car() # 클래스를 통해 인스턴스 생성
     print(porche.windows) # 4
-    
+
     porch.color = "Red"
     print(porche.color) # Red
-    
+
     ferrari = Car()
     ferrari.color = "Yellow"
     ```
+     
+  - method: class 안에 있는 함수
+    ```python
+    class Car(): 
+        wheels = 4 
+        doors = 4
+        windows = 4
+        seats = 4
+
+        def start(): # method: class 안에 있는 function
+            print("I started")
+
+    def start(): # function
+        print("I started")
+    ```
+     
+  - 파이썬은 모든 함수를 하나의 argument와 함께 사용한다.
+    [중요] 모든 method의 첫번째 argument는 method를 호출하는 instance 자신이다.
+    파이썬은 method를 호출할 때 method의 instance를 첫번째 argument로 사용한다.
+    ```python
+    # error code
+    class Car():
+        wheels = 4 
+        doors = 4
+        windows = 4
+        seats = 4
+
+        def start():
+            print("I started")
+
+    porche = Car()
+    porche.start() # error 발생 - TypeError: start() takes 0 positional arguments but 1 was given
+
+    # correct code
+    class Car():
+        wheels = 4 
+        doors = 4
+        windows = 4
+        seats = 4
+
+        def start(self):
+            print(self.color) # Green
+            print("I started")
+
+    porche = Car()
+    porche.color = "Green"
+    porche.start()
+
+    ```
+  
+
   
     
 
