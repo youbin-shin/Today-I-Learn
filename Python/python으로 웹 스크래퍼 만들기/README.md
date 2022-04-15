@@ -167,17 +167,17 @@ What is CSV?
         doors = 4
         windows = 4
         seats = 4
-
+    
     porche = Car() # 클래스를 통해 인스턴스 생성
     print(porche.windows) # 4
-
+    
     porch.color = "Red"
     print(porche.color) # Red
-
+    
     ferrari = Car()
     ferrari.color = "Yellow"
     ```
-     
+    
   - method: class 안에 있는 함수
     ```python
     class Car(): 
@@ -185,17 +185,46 @@ What is CSV?
         doors = 4
         windows = 4
         seats = 4
-
+    
         def start(): # method: class 안에 있는 function
             print("I started")
-
+    
     def start(): # function
         print("I started")
     ```
-     
+    
+    ```python
+    class Car(): 
+        
+        def __init__(self, *args, **kwargs):
+            self.wheels = 4 
+        	self.doors = 4
+        	self.windows = 4
+        	self.seats = 4
+            self.color = kwargs.get("color", "black")
+            self.price = kwargs.get("price", "$20")
+    	
+        def __str__(self): # override 재정의 (이미 정의되어 있는 메소드를 재정의함)
+            # return "wow override"
+        	return f"Car with {self.wheels} wheels"
+    
+    print(dir(Car)) # ['__class__', '__delattr__', '__dict__', ..., 'doors', 'seats', 'wheels', 'windows'] 
+    
+    porche = Car(color="green", price="$40")
+    print(porche.color, porche.price) # green $40
+    
+    mini = Car()
+    print(mini.color, mini.price) # black $20
+    ```
+    
+    - `dir({class Name})`: class 안에 있는 모든 것들을 리스트 보여줌 -> Object 안에 있는 모든 것을 보여준다!
+    - `__init__`: class가 만들어질 때 바로 만들어지는 method
+    - `__str__`: class의 instance 출력
+    
   - 파이썬은 모든 함수를 하나의 argument와 함께 사용한다.
-    [중요] 모든 method의 첫번째 argument는 method를 호출하는 instance 자신이다.
+    **[중요] 모든 method의 첫번째 argument는 method를 호출하는 instance 자신이다.**
     파이썬은 method를 호출할 때 method의 instance를 첫번째 argument로 사용한다.
+    
     ```python
     # error code
     class Car():
@@ -203,31 +232,31 @@ What is CSV?
         doors = 4
         windows = 4
         seats = 4
-
+    
         def start():
             print("I started")
-
+    
     porche = Car()
     porche.start() # error 발생 - TypeError: start() takes 0 positional arguments but 1 was given
-
+    
     # correct code
     class Car():
         wheels = 4 
         doors = 4
         windows = 4
         seats = 4
-
+    
         def start(self):
             print(self.color) # Green
             print("I started")
-
+    
     porche = Car()
     porche.color = "Green"
     porche.start()
-
+    
     ```
   
-
+  
   
     
 
