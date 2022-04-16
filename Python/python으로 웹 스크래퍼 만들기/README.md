@@ -255,11 +255,38 @@ What is CSV?
     porche.start()
     
     ```
-  
-  
-  
+  - Inheritance(상속)
+    ```python
+    class Car(): 
+        
+        def __init__(self, *args, **kwargs):
+            self.wheels = 4 
+        	self.doors = 4
+        	self.windows = 4
+        	self.seats = 4
+            self.color = kwargs.get("color", "black")
+            self.price = kwargs.get("price", "$20")
+            
+        def __str__(self): 
+        	return f"Car with {self.wheels} wheels"
+          
+          
+    class Convertible(Car): # Car class를 extend한다. -> inheritance
     
+        def __init(self, **kwargs):
+            super().__init__(**kwargs) # super 함수: 부모 클래스를 호출하는 함수로 없으면 Car의 init properties를 다 잃어버린다!
+            self.time = kwargs.get("time", 10) 
+    	
+        def take_off(self):
+            return "taking off"
 
+        def __str__(self): # overriding
+        	return f"Car with no roof"
+ 
+    porche = Convertible(color="green", price="$40")
+    print(porche.take_off())
+    print(porche) # Car with no rook
+    ```
 
 
 ## 실습 코드
