@@ -126,167 +126,187 @@ What is CSV?
 
 ### 알아야 할 개념
 
-- arguments 와 keyword arguments 란?
+#### arguments 와 keyword arguments 란?
 
-  - ```python
-    # ex 1
-    def plus(a, b, *args, **kwargs):
-        print(args) # 출력: (1, 1, 1, 3, 3, 3, 3, 3)
-        print(kwargs) # 출력: {'this': 'is', 'kwargs': 'args'}
-        return a + b
-    
-    plus(1, 2, 1, 1, 1, 3, 3, 3, 3, 3, 'this': 'is', 'kwargs': 'args')
-    ```
-
-    - `*args`: tuple 형태로 positional argument가 많이 있을 것이라는 의미(제한 x)
-    - `**kwargs`: dictionary 형태로 keyword argument가 많이 있을 것이라는 의미(제한 x)
-
-  - ```python
-    # ex 2) 계산기 로직
-    def plus(*args):
-        result = 0
-        for number in args:
-            result += number
-        return result
-    
-    plus(1, 2, 3, 4, 3, 2, 1, 2, 5, 4, 3, 2)
-    
-    ```
-
-    
-
-- 객체 프로그래밍
-
-  - 기억할 개념: Class, Inheritance(상속), method
+- ```python
+  # ex 1
+  def plus(a, b, *args, **kwargs):
+      print(args) # 출력: (1, 1, 1, 3, 3, 3, 3, 3)
+      print(kwargs) # 출력: {'this': 'is', 'kwargs': 'args'}
+      return a + b
   
-  - Class: 설계도 같은 것
-    ```python
-    class Car(): # -> class 기본 형태 
-        # properties
-        wheels = 4 
-        doors = 4
-        windows = 4
-        seats = 4
-    
-    porche = Car() # 클래스를 통해 인스턴스 생성
-    print(porche.windows) # 4
-    
-    porch.color = "Red"
-    print(porche.color) # Red
-    
-    ferrari = Car()
-    ferrari.color = "Yellow"
-    ```
-    
-  - method: class 안에 있는 함수
-    ```python
-    class Car(): 
-        wheels = 4 
-        doors = 4
-        windows = 4
-        seats = 4
-    
-        def start(): # method: class 안에 있는 function
-            print("I started")
-    
-    def start(): # function
-        print("I started")
-    ```
-    
-    ```python
-    class Car(): 
-        
-        def __init__(self, *args, **kwargs):
-            self.wheels = 4 
-        	self.doors = 4
-        	self.windows = 4
-        	self.seats = 4
-            self.color = kwargs.get("color", "black")
-            self.price = kwargs.get("price", "$20")
-    	
-        def __str__(self): # override 재정의 (이미 정의되어 있는 메소드를 재정의함)
-            # return "wow override"
-        	return f"Car with {self.wheels} wheels"
-    
-    print(dir(Car)) # ['__class__', '__delattr__', '__dict__', ..., 'doors', 'seats', 'wheels', 'windows'] 
-    
-    porche = Car(color="green", price="$40")
-    print(porche.color, porche.price) # green $40
-    
-    mini = Car()
-    print(mini.color, mini.price) # black $20
-    ```
-    
-    - `dir({class Name})`: class 안에 있는 모든 것들을 리스트 보여줌 -> Object 안에 있는 모든 것을 보여준다!
-    - `__init__`: class가 만들어질 때 바로 만들어지는 method
-    - `__str__`: class의 instance 출력
-    
-  - 파이썬은 모든 함수를 하나의 argument와 함께 사용한다.
-    **[중요] 모든 method의 첫번째 argument는 method를 호출하는 instance 자신이다.**
-    파이썬은 method를 호출할 때 method의 instance를 첫번째 argument로 사용한다.
-    
-    ```python
-    # error code
-    class Car():
-        wheels = 4 
-        doors = 4
-        windows = 4
-        seats = 4
-    
-        def start():
-            print("I started")
-    
-    porche = Car()
-    porche.start() # error 발생 - TypeError: start() takes 0 positional arguments but 1 was given
-    
-    # correct code
-    class Car():
-        wheels = 4 
-        doors = 4
-        windows = 4
-        seats = 4
-    
-        def start(self):
-            print(self.color) # Green
-            print("I started")
-    
-    porche = Car()
-    porche.color = "Green"
-    porche.start()
-    
-    ```
-  - Inheritance(상속)
-    ```python
-    class Car(): 
-        
-        def __init__(self, *args, **kwargs):
-            self.wheels = 4 
-        	self.doors = 4
-        	self.windows = 4
-        	self.seats = 4
-            self.color = kwargs.get("color", "black")
-            self.price = kwargs.get("price", "$20")
-            
-        def __str__(self): 
-        	return f"Car with {self.wheels} wheels"
-          
-          
-    class Convertible(Car): # Car class를 extend한다. -> inheritance
-    
-        def __init(self, **kwargs):
-            super().__init__(**kwargs) # super 함수: 부모 클래스를 호출하는 함수로 없으면 Car의 init properties를 다 잃어버린다!
-            self.time = kwargs.get("time", 10) 
-    	
-        def take_off(self):
-            return "taking off"
+  plus(1, 2, 1, 1, 1, 3, 3, 3, 3, 3, 'this': 'is', 'kwargs': 'args')
+  ```
 
-        def __str__(self): # overriding
-        	return f"Car with no roof"
- 
-    porche = Convertible(color="green", price="$40")
-    print(porche.take_off())
-    print(porche) # Car with no rook
-    ```
+  - `*args`: tuple 형태로 positional argument가 많이 있을 것이라는 의미(제한 x)
+  - `**kwargs`: dictionary 형태로 keyword argument가 많이 있을 것이라는 의미(제한 x)
+
+- ```python
+  # ex 2) 계산기 로직
+  def plus(*args):
+      result = 0
+      for number in args:
+          result += number
+      return result
+  
+  plus(1, 2, 3, 4, 3, 2, 1, 2, 5, 4, 3, 2)
+  
+  ```
+
+  
+
+#### 객체 프로그래밍
+
+- 기억할 개념: Class, Inheritance(상속), method
+
+- ##### Class: 설계도 같은 것
+
+  ```python
+  class Car(): # -> class 기본 형태 
+      # properties
+      wheels = 4 
+      doors = 4
+      windows = 4
+      seats = 4
+  
+  porche = Car() # 클래스를 통해 인스턴스 생성
+  print(porche.windows) # 4
+  
+  porch.color = "Red"
+  print(porche.color) # Red
+  
+  ferrari = Car()
+  ferrari.color = "Yellow"
+  ```
+
+- ##### method: class 안에 있는 함수
+
+  ```python
+  class Car(): 
+      wheels = 4 
+      doors = 4
+      windows = 4
+      seats = 4
+  
+      def start(): # method: class 안에 있는 function
+          print("I started")
+  
+  def start(): # function
+      print("I started")
+  ```
+
+  ```python
+  class Car(): 
+      
+      def __init__(self, *args, **kwargs):
+          self.wheels = 4 
+      	self.doors = 4
+      	self.windows = 4
+      	self.seats = 4
+          self.color = kwargs.get("color", "black")
+          self.price = kwargs.get("price", "$20")
+  	
+      def __str__(self): # override 재정의 (이미 정의되어 있는 메소드를 재정의함)
+          # return "wow override"
+      	return f"Car with {self.wheels} wheels"
+  
+  print(dir(Car)) # ['__class__', '__delattr__', '__dict__', ..., 'doors', 'seats', 'wheels', 'windows'] 
+  
+  porche = Car(color="green", price="$40")
+  print(porche.color, porche.price) # green $40
+  
+  mini = Car()
+  print(mini.color, mini.price) # black $20
+  ```
+
+  - `dir({class Name})`: class 안에 있는 모든 것들을 리스트 보여줌 -> Object 안에 있는 모든 것을 보여준다!
+  - `__init__`: class가 만들어질 때 바로 만들어지는 method
+  - `__str__`: class의 instance 출력
+
+- 파이썬은 모든 함수를 하나의 argument와 함께 사용한다.
+  **[중요] 모든 method의 첫번째 argument는 method를 호출하는 instance 자신이다.**
+  파이썬은 method를 호출할 때 method의 instance를 첫번째 argument로 사용한다.
+
+  ```python
+  # error code
+  class Car():
+      wheels = 4 
+      doors = 4
+      windows = 4
+      seats = 4
+  
+      def start():
+          print("I started")
+  
+  porche = Car()
+  porche.start() # error 발생 - TypeError: start() takes 0 positional arguments but 1 was given
+  
+  # correct code
+  class Car():
+      wheels = 4 
+      doors = 4
+      windows = 4
+      seats = 4
+  
+      def start(self):
+          print(self.color) # Green
+          print("I started")
+  
+  porche = Car()
+  porche.color = "Green"
+  porche.start()
+  
+  ```
+
+- ##### Inheritance(상속)
+
+  ```python
+  class Car(): 
+      
+      def __init__(self, *args, **kwargs):
+          self.wheels = 4 
+      	self.doors = 4
+      	self.windows = 4
+      	self.seats = 4
+          self.color = kwargs.get("color", "black")
+          self.price = kwargs.get("price", "$20")
+          
+      def __str__(self): 
+      	return f"Car with {self.wheels} wheels"
+        
+        
+  class Convertible(Car): # Car class를 extend한다. -> inheritance
+  
+      def __init(self, **kwargs):
+          super().__init__(**kwargs) # super 함수: 부모 클래스를 호출하는 함수로 없으면 Car의 init properties를 다 잃어버린다!
+          self.time = kwargs.get("time", 10) 
+  	
+      def take_off(self):
+          return "taking off"
+  
+      def __str__(self): # overriding
+      	return f"Car with no roof"
+   
+  porche = Convertible(color="green", price="$40")
+  print(porche.take_off())
+  print(porche) # Car with no rook
+  ```
+
+
+
+## 4. Upgrade scrapper semi-project 
+
+[Flask]: https://flask.palletsprojects.com/en/2.1.x/	"파이썬으로 웹사이트를 만들 수 있게 해주는 micro-framework"
+
+- 진행 목록
+
+  - scrapper를 웹서버에 넣는 작업 진행
+
+  - `to-be` 검색 서치바에 개발 언어 입력시 스크랩터가 동작하여 사이트에 보여지도록 처리
+    - `as-is` python 기준 채용 공고를 scrapper하여 csv로 파일 생성
+
+
+
 
 
 ## 실습 코드
