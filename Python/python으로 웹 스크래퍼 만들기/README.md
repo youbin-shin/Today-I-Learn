@@ -301,9 +301,30 @@ What is CSV?
 - 진행 목록
 
   - scrapper를 웹서버에 넣는 작업 진행
-
   - `to-be` 검색 서치바에 개발 언어 입력시 스크랩터가 동작하여 사이트에 보여지도록 처리
     - `as-is` python 기준 채용 공고를 scrapper하여 csv로 파일 생성
+
+### 1. Introduction to Flask
+
+```python
+from flask import Flask
+
+app = Flask("앱 이름")
+
+@app.route("/")
+def home():
+    return "This is home"
+
+@app.route("/hello")
+def hello():
+    return "This is hello page"
+
+app.run() # 서버 구축 (웹사이트 이동 가능)
+# (참고) repl.it에서는 app.run(host="0.0.0.0")으로 정의 필요
+```
+
+- `@`: 데코레이터를 통해 안에 정의된 url로 요청이 오면 해당 함수를 동작하는역할을 한다.
+  - 데코레이터는 바로 아래 있는 함수만 보기에 바로 아래 함수가 정의되어야 한다.
 
 
 
@@ -358,3 +379,13 @@ What is CSV?
         # ex) 엔터 삭제
         .get_text(strip=True).strip('\t').strop('\n') 
         ```
+
+
+
+### flask 실행 방법
+
+```bash
+$ cd /recruitment_website_scrap_project
+$ python flask_main.py
+```
+
