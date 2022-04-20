@@ -319,6 +319,10 @@ def home():
 def hello():
     return "This is hello page"
 
+@app.route("/<username>") # dynamic URL
+def hello(username):
+  return f"Hello {username}!"
+
 app.run() # 서버 구축 (웹사이트 이동 가능)
 # (참고) repl.it에서는 app.run(host="0.0.0.0")으로 정의 필요
 ```
