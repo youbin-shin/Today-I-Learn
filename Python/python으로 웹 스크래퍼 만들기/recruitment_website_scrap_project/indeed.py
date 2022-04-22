@@ -3,11 +3,10 @@ from bs4 import BeautifulSoup
 
 LIMIT = 50
 BASE_URL = "https://kr.indeed.com"
-URL = f"{BASE_URL}/jobs?q=python&limit={LIMIT}"
 
-def get_last_page():
+def get_last_page(url):
   # indeed 사이트에서 마지막 페이지를 가져오는 함수
-  result = requests.get(URL)
+  result = requests.get(url)
   soup = BeautifulSoup(result.text, 'html.parser')
   pagination = soup.find('div', {'class': 'pagination'})
   links = pagination.find_all('a')
@@ -32,12 +31,12 @@ def extract_job(html):
     'apply_link': f'{BASE_URL}{apply_part_link}'
   }
 
-def extract_jobs(last_page):
+def extract_jobs(last_page, url):
   # 페이지별로 사이트에서 추출할 jobs에 대한 정보를 담아 리턴하는 함수
   jobs = []
   for page in range(last_page):
     print(f"Scrapping Indeed Pages: {page}")
-    result = requests.get(f"{URL}&start={page*LIMIT}")
+    result = requests.get(f"{url}&start={page*LIMIT}")
     # jobs에 필요한 데이터 추가 로직
     soup = BeautifulSoup(result.text, 'html.parser')
     results = soup.find_all('a', {'class': 'tapItem'})
@@ -46,8 +45,9 @@ def extract_jobs(last_page):
       jobs.append(job)
   return jobs
 
-def get_jobs():
-  # indeed 취업 사이트에서 python 직무 채용 목록 스크랩트하는 함수
-  last_page = get_last_page()
-  jobs = extract_jobs(last_page)
+def get_jobs(word):
+  # indeed 취업 사이트에서 word에 해당하는 직무 채용 목록 스크랩트하는 함수
+  url = f"{BASE_URL}/jobs?q={word}&limit={LIMIT}"
+  last_page = get_last_page(url)
+  jobs = extract_jobs(last_page, url)
   return jobs
